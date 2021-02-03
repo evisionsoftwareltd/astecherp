@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="chartOfAccount" language="groovy" pageWidth="650" pageHeight="792" columnWidth="620" leftMargin="20" rightMargin="10" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="549"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.callouts" value="##Thu Feb 10 16:11:40 GMT+06:00 2011"/>
+	<parameter name="comName" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="companyId" class="java.lang.String"/>
+	<parameter name="sql" class="java.lang.String">
+		<defaultValueExpression><![CDATA["select * from vwFn_rptChartofAccounts order by head_id,group_name,sub_group_name,cast(substring(Ledger_Id, 3, 50) as int)"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="head_type" class="java.lang.String"/>
+	<field name="Head_id" class="java.lang.String"/>
+	<field name="Head_Name" class="java.lang.String"/>
+	<field name="Group_id" class="java.lang.String"/>
+	<field name="Group_Name" class="java.lang.String"/>
+	<field name="Sub_Group_id" class="java.lang.String"/>
+	<field name="Sub_Group_Name" class="java.lang.String"/>
+	<field name="Ledger_Id" class="java.lang.String"/>
+	<field name="Ledger_Name" class="java.lang.String"/>
+	<field name="pos" class="java.lang.String"/>
+	<variable name="hc" class="java.lang.Integer" resetType="Group" resetGroup="head_Name">
+		<variableExpression><![CDATA[$V{p}>0?new Integer($V{hc}+1):1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="gc" class="java.lang.Integer" resetType="Group" resetGroup="group">
+		<variableExpression><![CDATA[$V{p}>0?new Integer($V{gc}+1):1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="sc" class="java.lang.Integer" resetType="Group" resetGroup="subgroup">
+		<variableExpression><![CDATA[$V{p}>0?new Integer($V{sc}+1):1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="p" class="java.lang.Integer" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{p}+1)]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="false" class="java.lang.String"/>
+	<group name="head_type" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{head_type}]]></groupExpression>
+		<groupHeader>
+			<band height="38">
+				<textField>
+					<reportElement x="0" y="4" width="193" height="12"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{head_type}=="%"?"All":$F{head_type}=="A"?"Assets":$F{head_type}=="E"?"Expenses":$F{head_type}=="I"?"Income":$F{head_type}=="L"?"Liabilities":$F{head_type}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="1" y="37" width="619" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="1" y="23" width="619" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="24" width="1" height="13"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="3" y="25" width="150" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Primary Category]]></text>
+				</staticText>
+				<line>
+					<reportElement x="153" y="24" width="1" height="13"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="312" y="24" width="1" height="13"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="454" y="24" width="1" height="13"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="620" y="24" width="1" height="13"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="154" y="25" width="128" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Group]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="313" y="25" width="143" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sub-Group]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="454" y="25" width="166" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ledger]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="1" splitType="Prevent">
+				<line>
+					<reportElement x="1" y="0" width="620" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="head_Name">
+		<groupExpression><![CDATA[$F{Head_Name}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+	</group>
+	<group name="group">
+		<groupExpression><![CDATA[$F{Group_Name}]]></groupExpression>
+	</group>
+	<group name="subgroup">
+		<groupExpression><![CDATA[$F{Sub_Group_Name}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="621" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{comName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="18" width="621" height="14"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="36" width="621" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Chart of Account"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="36" width="620" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<image scaleImage="FillFrame" isLazy="true" onErrorType="Blank">
+				<reportElement x="0" y="0" width="45" height="37"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="155" y="0" width="299" height="12" isPrintInFirstWholeBand="true"/>
+				<box>
+					<topPen lineWidth="0.25" lineColor="#999999"/>
+					<bottomPen lineWidth="0.0" lineColor="#999999"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="8" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Group_Name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="313" y="0" width="141" height="12" isRemoveLineWhenBlank="true"/>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#999999"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#999999"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="8" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Sub_Group_Name}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="1" height="12" isPrintWhenDetailOverflows="true"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="153" y="0" width="1" height="12" isPrintWhenDetailOverflows="true"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="312" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="454" y="0" width="1" height="12" isPrintWhenDetailOverflows="true"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="620" y="0" width="1" height="12" isPrintWhenDetailOverflows="true"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement isPrintRepeatedValues="false" x="1" y="0" width="453" height="12" isPrintInFirstWholeBand="true"/>
+				<box>
+					<topPen lineWidth="0.25" lineColor="#999999"/>
+					<bottomPen lineWidth="0.0" lineColor="#999999"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="8" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Head_Name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="456" y="0" width="164" height="12">
+					<printWhenExpression><![CDATA[$F{Ledger_Id}!=""]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25" lineColor="#999999"/>
+					<leftPen lineWidth="0.0" lineColor="#999999"/>
+					<bottomPen lineWidth="0.25" lineColor="#999999"/>
+					<rightPen lineWidth="0.0" lineColor="#999999"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="8" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Ledger_Name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="1" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="620" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="12" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="599" y="0" width="22" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="541" y="0" width="57" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="170" y="0" width="269" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Software Solution by : E-Vision Software Limited. || www.eslctg.com]]></text>
+			</staticText>
+			<textField pattern="dd-MM-yy h.mm a">
+				<reportElement x="69" y="0" width="94" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="82" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Print Date & Time :]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

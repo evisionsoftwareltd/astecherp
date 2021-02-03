@@ -1,0 +1,1096 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EmployeeWiseCoinAnalysis" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="company" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="sql" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["select * from dbo.funEmpCoinAnalysis('DEPT3','SEC-7','EMP-174','April','2016') order by vDepartmentName,SectionName,vEmployeeCode"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="section" class="java.lang.String"/>
+	<parameter name="username" class="java.lang.String"/>
+	<parameter name="phone" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="month" class="java.lang.String"/>
+	<parameter name="SysDate" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="vEmployeeID" class="java.lang.String"/>
+	<field name="vEmployeeCode" class="java.lang.String"/>
+	<field name="vProximityID" class="java.lang.String"/>
+	<field name="vEmployeeName" class="java.lang.String"/>
+	<field name="vDesignation" class="java.lang.String"/>
+	<field name="vDepartmentID" class="java.lang.String"/>
+	<field name="vDepartmentName" class="java.lang.String"/>
+	<field name="vsectionID" class="java.lang.String"/>
+	<field name="SectionName" class="java.lang.String"/>
+	<field name="Amount" class="java.math.BigDecimal"/>
+	<field name="thousand" class="java.lang.Integer"/>
+	<field name="fivehundred" class="java.lang.Integer"/>
+	<field name="hundred" class="java.lang.Integer"/>
+	<field name="fifty" class="java.lang.Integer"/>
+	<field name="twenty" class="java.lang.Integer"/>
+	<field name="ten" class="java.lang.Integer"/>
+	<field name="five" class="java.lang.Integer"/>
+	<field name="two" class="java.lang.Integer"/>
+	<field name="one" class="java.lang.Integer"/>
+	<variable name="sl" class="java.lang.Number" resetType="Group" resetGroup="Section">
+		<variableExpression><![CDATA[$V{sl}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalNetpay" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{Amount}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalThousand" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{thousand}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalFivehundred" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{fivehundred}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalhundred" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{hundred}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalfifty" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{fifty}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totaltwenty" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{twenty}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalTen" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{ten}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalFive" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{five}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalTwo" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{two}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalOne" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{one}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="subNetPay" class="java.math.BigDecimal" resetType="Group" resetGroup="Section" calculation="Sum">
+		<variableExpression><![CDATA[$F{Amount}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="subtotalThousand" class="java.lang.Integer" resetType="Group" resetGroup="Section" calculation="Sum">
+		<variableExpression><![CDATA[$F{thousand}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="subtotalFivehundred" class="java.lang.Integer" resetType="Group" resetGroup="Section" calculation="Sum">
+		<variableExpression><![CDATA[$F{fivehundred}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="subtotalhundred" class="java.lang.Integer" resetType="Group" resetGroup="Section" calculation="Sum">
+		<variableExpression><![CDATA[$F{hundred}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="subtotalfifty" class="java.lang.Integer" resetType="Group" resetGroup="Section" calculation="Sum">
+		<variableExpression><![CDATA[$F{fifty}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="subtotaltwenty" class="java.lang.Integer" resetType="Group" resetGroup="Section" calculation="Sum">
+		<variableExpression><![CDATA[$F{twenty}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="subtotalTen" class="java.lang.Integer" resetType="Group" resetGroup="Section" calculation="Sum">
+		<variableExpression><![CDATA[$F{ten}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="subtotalFive" class="java.lang.Integer" resetType="Group" resetGroup="Section" calculation="Sum">
+		<variableExpression><![CDATA[$F{five}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="subtotalTwo" class="java.lang.Integer" resetType="Group" resetGroup="Section" calculation="Sum">
+		<variableExpression><![CDATA[$F{two}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="subtotalOne" class="java.lang.Integer" resetType="Group" resetGroup="Section" calculation="Sum">
+		<variableExpression><![CDATA[$F{one}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="Section">
+		<groupExpression><![CDATA[$F{vDepartmentName}+""+$F{SectionName}]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<line>
+					<reportElement x="0" y="14" width="802" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="801" y="0" width="1" height="15"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="0" width="1" height="15"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="401" y="1" width="75" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Section Name :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="476" y="1" width="183" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{SectionName}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="1" y="1" width="86" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Department Name :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="87" y="1" width="263" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vDepartmentName}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="16">
+				<line>
+					<reportElement x="0" y="15" width="802" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="801" y="0" width="1" height="15"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="0" width="1" height="16" printWhenGroupChanges="Section"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<textField pattern="#,##0">
+					<reportElement x="495" y="2" width="40" height="12">
+						<printWhenExpression><![CDATA[$V{subtotalhundred}!=0]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2">
+						<bottomPen lineWidth="0.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{subtotalhundred}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="669" y="2" width="42" height="12">
+						<printWhenExpression><![CDATA[$V{subtotalFive}!=0]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2">
+						<bottomPen lineWidth="0.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{subtotalFive}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="404" y="2" width="36" height="12">
+						<printWhenExpression><![CDATA[$V{subtotalThousand}!=0]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2">
+						<bottomPen lineWidth="0.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{subtotalThousand}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="313" y="2" width="36" height="12"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total :]]></text>
+				</staticText>
+				<textField pattern="#,##0">
+					<reportElement x="581" y="2" width="42" height="12">
+						<printWhenExpression><![CDATA[$V{subtotaltwenty}!=0]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2">
+						<bottomPen lineWidth="0.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{subtotaltwenty}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="757" y="2" width="44" height="12">
+						<printWhenExpression><![CDATA[$V{subtotalOne}!=0]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2">
+						<bottomPen lineWidth="0.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{subtotalOne}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="713" y="2" width="42" height="12">
+						<printWhenExpression><![CDATA[$V{subtotalTwo}!=0]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2">
+						<bottomPen lineWidth="0.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{subtotalTwo}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="350" y="2" width="47" height="12">
+						<printWhenExpression><![CDATA[$V{subNetPay}!=0]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2">
+						<bottomPen lineWidth="0.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{subNetPay}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="625" y="2" width="42" height="12">
+						<printWhenExpression><![CDATA[$V{subtotalTen}!=0]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2">
+						<bottomPen lineWidth="0.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{subtotalTen}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="442" y="2" width="50" height="12">
+						<printWhenExpression><![CDATA[$V{subtotalFivehundred}!=0]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2">
+						<bottomPen lineWidth="0.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{subtotalFivehundred}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="537" y="1" width="42" height="13">
+						<printWhenExpression><![CDATA[$V{subtotalfifty}!=0]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2">
+						<bottomPen lineWidth="0.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{subtotalfifty}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="79">
+			<rectangle radius="10">
+				<reportElement mode="Transparent" x="301" y="49" width="201" height="15"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="49" width="802" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EMPLOYEE WISE COIN ANALYSIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="702" y="65" width="33" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Month]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="735" y="65" width="5" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="1" y="0" width="100" height="40"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="29" width="802" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{phone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="16" width="802" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="802" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{company}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="742" y="65" width="59" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{month}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="98" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="18" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="801" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="1" y="1" width="13" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="267" y="1" width="85" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Designation]]></text>
+			</staticText>
+			<line>
+				<reportElement x="14" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="163" y="1" width="103" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<line>
+				<reportElement x="266" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="15" y="1" width="83" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Employee ID]]></text>
+			</staticText>
+			<line>
+				<reportElement x="668" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="99" y="1" width="63" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proximity ID]]></text>
+			</staticText>
+			<line>
+				<reportElement x="162" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="353" y="1" width="47" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Net Pay]]></text>
+			</staticText>
+			<line>
+				<reportElement x="440" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="352" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="400" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="493" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="401" y="1" width="39" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thousand]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="441" y="1" width="52" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Five Hundred]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="494" y="1" width="42" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hundred]]></text>
+			</staticText>
+			<line>
+				<reportElement x="580" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="536" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="537" y="1" width="43" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fifty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="581" y="1" width="43" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Twenty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="625" y="1" width="43" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ten]]></text>
+			</staticText>
+			<line>
+				<reportElement x="624" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="712" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="669" y="1" width="43" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Five]]></text>
+			</staticText>
+			<line>
+				<reportElement x="756" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="713" y="1" width="43" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Two]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="757" y="1" width="44" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[One]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15">
+			<line>
+				<reportElement x="400" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="352" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="493" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="440" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="14" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="14" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="801" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="580" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="668" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="624" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="536" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="266" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="162" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="98" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="712" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="756" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="15" y="1" width="83" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vEmployeeCode}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="163" y="1" width="103" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vEmployeeName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="267" y="1" width="85" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vDesignation}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="401" y="1" width="39" height="13">
+					<printWhenExpression><![CDATA[$F{thousand}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{thousand}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="441" y="1" width="52" height="13">
+					<printWhenExpression><![CDATA[$F{fivehundred}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{fivehundred}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="537" y="1" width="43" height="13">
+					<printWhenExpression><![CDATA[$F{fifty}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{fifty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="581" y="1" width="43" height="13">
+					<printWhenExpression><![CDATA[$F{twenty}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{twenty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="625" y="0" width="43" height="14">
+					<printWhenExpression><![CDATA[$F{ten}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{ten}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="669" y="1" width="43" height="13">
+					<printWhenExpression><![CDATA[$F{five}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{five}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="713" y="0" width="43" height="14">
+					<printWhenExpression><![CDATA[$F{two}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{two}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="757" y="0" width="44" height="14">
+					<printWhenExpression><![CDATA[$F{one}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{one}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="353" y="1" width="47" height="13">
+					<printWhenExpression><![CDATA[$F{Amount}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Amount}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="99" y="1" width="63" height="13"/>
+				<box leftPadding="2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vProximityID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="13" height="14"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{sl}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="494" y="0" width="42" height="14">
+					<printWhenExpression><![CDATA[$F{hundred}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{hundred}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="24" splitType="Immediate">
+			<line>
+				<reportElement x="0" y="15" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.4"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="742" y="16" width="37" height="8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="779" y="16" width="21" height="8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="215" y="16" width="431" height="8" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Developed by: E-Vision Software Ltd. ||  Mob:01755-506044 || www.eslctg.com]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="4" y="16" width="101" height="8"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{SysDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="107" y="16" width="108" height="8"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{username}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="23">
+			<line>
+				<reportElement x="0" y="14" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.4"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="215" y="15" width="431" height="8" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Developed by: E-Vision Software Ltd. || Mob:01755-506044 || www.eslctg.com]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="742" y="15" width="37" height="8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="779" y="15" width="21" height="8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-81" y="0" width="10" height="8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-67" y="0" width="32" height="8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Month Day,]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="4" y="15" width="101" height="8"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{SysDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="107" y="15" width="108" height="8"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{username}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="12" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement x="350" y="0" width="47" height="12">
+					<printWhenExpression><![CDATA[$V{totalNetpay}!=0]]></printWhenExpression>
+				</reportElement>
+				<box bottomPadding="0" rightPadding="2">
+					<topPen lineStyle="Double"/>
+					<bottomPen lineWidth="1.5" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{totalNetpay}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="404" y="0" width="36" height="12">
+					<printWhenExpression><![CDATA[$V{totalThousand}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2">
+					<bottomPen lineWidth="1.5" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{totalThousand}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="442" y="0" width="50" height="12">
+					<printWhenExpression><![CDATA[$V{totalFivehundred}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2">
+					<bottomPen lineWidth="1.5" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{totalFivehundred}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="495" y="0" width="40" height="12">
+					<printWhenExpression><![CDATA[$V{totalhundred}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2">
+					<bottomPen lineWidth="1.5" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{totalhundred}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="537" y="-1" width="42" height="13">
+					<printWhenExpression><![CDATA[$V{totalfifty}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2">
+					<bottomPen lineWidth="1.5" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{totalfifty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="581" y="0" width="42" height="12">
+					<printWhenExpression><![CDATA[$V{totaltwenty}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2">
+					<bottomPen lineWidth="1.5" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{totaltwenty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="625" y="0" width="42" height="12">
+					<printWhenExpression><![CDATA[$V{totalTen}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2">
+					<bottomPen lineWidth="1.5" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{totalTen}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="669" y="0" width="42" height="12">
+					<printWhenExpression><![CDATA[$V{totalFive}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2">
+					<bottomPen lineWidth="1.5" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{totalFive}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="713" y="0" width="42" height="12">
+					<printWhenExpression><![CDATA[$V{totalTwo}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2">
+					<bottomPen lineWidth="1.5" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{totalTwo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="757" y="0" width="44" height="12">
+					<printWhenExpression><![CDATA[$V{totalOne}!=0]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2">
+					<bottomPen lineWidth="1.5" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{totalOne}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="288" y="0" width="61" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grand Total :]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

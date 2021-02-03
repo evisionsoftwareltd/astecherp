@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptDateBetweenSpecialAbsent" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="826" leftMargin="8" rightMargin="8" topMargin="16" bottomMargin="8">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="372"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="company" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="email" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="phone" class="java.lang.String"/>
+	<parameter name="fax" class="java.lang.String"/>
+	<parameter name="sql" class="java.lang.String">
+		<defaultValueExpression><![CDATA["select * from funDailyEmployeeAttendance('2016-04-01','2016-04-04','%','%','%') where ((ISNULL(dInTimeOne,'')='' or ISNULL(dOutTimeOne,'')='') or datepart(HH,dTotalWorkingHour)<7) and not(ISNULL(dInTimeOne,'')='' and ISNULL(dOutTimeOne,'')='') order by vDepartmentName,vSectionName,vEmployeeCode"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="username" class="java.lang.String"/>
+	<parameter name="userIp" class="java.lang.String"/>
+	<parameter name="SysDate" class="java.util.Date"/>
+	<parameter name="date" class="java.util.Date"/>
+	<parameter name="fromDate" class="java.lang.String"/>
+	<parameter name="toDate" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="Date" class="java.sql.Date"/>
+	<field name="vEmployeeID" class="java.lang.String"/>
+	<field name="previousEmployeeCode" class="java.lang.String"/>
+	<field name="vEmployeeCode" class="java.lang.String"/>
+	<field name="previousProximityID" class="java.lang.String"/>
+	<field name="vProximityID" class="java.lang.String"/>
+	<field name="vEmployeeName" class="java.lang.String"/>
+	<field name="dJoinDate" class="java.sql.Date"/>
+	<field name="vShiftId" class="java.lang.String"/>
+	<field name="vShiftName" class="java.lang.String"/>
+	<field name="vDesignationID" class="java.lang.String"/>
+	<field name="vDesignationName" class="java.lang.String"/>
+	<field name="iDesignationSerial" class="java.lang.Integer"/>
+	<field name="vDepartmentId" class="java.lang.String"/>
+	<field name="vDepartmentName" class="java.lang.String"/>
+	<field name="vSectionId" class="java.lang.String"/>
+	<field name="vSectionName" class="java.lang.String"/>
+	<field name="dInTimeOne" class="java.sql.Timestamp"/>
+	<field name="dOutTimeOne" class="java.sql.Timestamp"/>
+	<field name="dInTimeTwo" class="java.sql.Timestamp"/>
+	<field name="dOutTimeTwo" class="java.sql.Timestamp"/>
+	<field name="dTotalWorkingHour" class="java.sql.Time"/>
+	<field name="dFirstOTHour" class="java.sql.Time"/>
+	<field name="dSecondOTHour" class="java.sql.Time"/>
+	<field name="dOtHour" class="java.sql.Time"/>
+	<field name="vPresentFlag" class="java.lang.String"/>
+	<field name="iOtStatus" class="java.lang.Integer"/>
+	<field name="vEditFlag" class="java.lang.String"/>
+	<variable name="sl" class="java.lang.Number" resetType="Group" resetGroup="employee">
+		<variableExpression><![CDATA[$V{sl}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="Section">
+		<groupExpression><![CDATA[$F{vSectionName}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+	</group>
+	<group name="employee">
+		<groupExpression><![CDATA[$F{vEmployeeID}]]></groupExpression>
+		<groupHeader>
+			<band height="82">
+				<textField isBlankWhenNull="true">
+					<reportElement x="182" y="20" width="173" height="13"/>
+					<box leftPadding="2">
+						<pen lineStyle="Solid"/>
+						<topPen lineStyle="Solid"/>
+						<leftPen lineStyle="Solid"/>
+						<bottomPen lineStyle="Solid"/>
+						<rightPen lineStyle="Solid"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vEmployeeCode}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="95" y="20" width="80" height="13"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Employee Id]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="95" y="34" width="80" height="13"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Proximity Id]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="182" y="34" width="173" height="13"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vProximityID}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="95" y="48" width="80" height="13"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Employee Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="175" y="34" width="6" height="13"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="175" y="48" width="6" height="13"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="175" y="20" width="6" height="13"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="182" y="48" width="174" height="13"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vEmployeeName}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="470" y="6" width="80" height="13"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Joining Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="550" y="6" width="6" height="13"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+					<reportElement x="557" y="6" width="75" height="13"/>
+					<box leftPadding="3"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{dJoinDate}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="470" y="20" width="80" height="13"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Designation]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="550" y="20" width="6" height="13"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="557" y="20" width="170" height="13"/>
+					<box leftPadding="3"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vDesignationName}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="470" y="48" width="80" height="13"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Section Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="550" y="48" width="6" height="13"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="557" y="48" width="170" height="13"/>
+					<box leftPadding="3"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="9"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vSectionName}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="93" y="64" width="634" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="93" y="81" width="634" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="726" y="64" width="1" height="18"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="94" y="65" width="27" height="16"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SL#]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="292" y="65" width="109" height="16"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[In Time]]></text>
+				</staticText>
+				<line>
+					<reportElement x="122" y="64" width="1" height="18"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="246" y="64" width="1" height="18"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="603" y="65" width="61" height="16"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Hours]]></text>
+				</staticText>
+				<line>
+					<reportElement x="663" y="64" width="1" height="18"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="248" y="65" width="42" height="16"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[In Date]]></text>
+				</staticText>
+				<line>
+					<reportElement x="290" y="64" width="1" height="18"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="401" y="64" width="1" height="18"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="403" y="65" width="87" height="16"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Out Date]]></text>
+				</staticText>
+				<line>
+					<reportElement x="166" y="64" width="1" height="18"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="168" y="65" width="77" height="16"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Shift Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="665" y="65" width="60" height="16"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[OT Hours]]></text>
+				</staticText>
+				<line>
+					<reportElement x="490" y="64" width="1" height="18"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="492" y="65" width="109" height="16"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Out Time]]></text>
+				</staticText>
+				<line>
+					<reportElement x="601" y="64" width="1" height="18"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="123" y="65" width="42" height="16"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date]]></text>
+				</staticText>
+				<line>
+					<reportElement x="93" y="64" width="1" height="18"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="550" y="34" width="6" height="13"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="470" y="34" width="80" height="13"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Department Name]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="557" y="34" width="170" height="13"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vDepartmentName}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="826" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{company}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="18" width="826" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="31" width="826" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{phone}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="100" height="40"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="44">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="9" width="826" height="14" forecolor="#000000" backcolor="#000000"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATE BETWEEN SPECIAL ABSENT REGISTER]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement mode="Transparent" x="278" y="8" width="270" height="16"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="386" y="31" width="103" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{fromDate}+" to "+$P{toDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="355" y="31" width="30" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date : ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="16">
+			<line>
+				<reportElement x="93" y="0" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="93" y="15" width="634" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="122" y="0" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="246" y="0" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="726" y="0" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="490" y="0" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="94" y="1" width="27" height="14"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{sl}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="663" y="0" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<textField pattern="HH:mm:ss">
+				<reportElement x="602" y="0" width="61" height="15">
+					<printWhenExpression><![CDATA[$F{dTotalWorkingHour}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dTotalWorkingHour}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="290" y="0" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="401" y="0" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<textField pattern="dd-MM-yy">
+				<reportElement x="248" y="0" width="42" height="15">
+					<printWhenExpression><![CDATA[$F{dInTimeOne}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dInTimeOne}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="601" y="0" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<textField pattern="HH:mm:ss">
+				<reportElement x="665" y="0" width="60" height="15">
+					<printWhenExpression><![CDATA[$F{dOtHour}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Time"><![CDATA[$F{dOtHour}]]></textFieldExpression>
+			</textField>
+			<textField pattern="hh:mm:ss a">
+				<reportElement x="292" y="0" width="53" height="15">
+					<printWhenExpression><![CDATA[$F{dInTimeTwo}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dInTimeTwo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="hh:mm:ss a">
+				<reportElement x="492" y="0" width="53" height="15">
+					<printWhenExpression><![CDATA[$F{dOutTimeTwo}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dOutTimeTwo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="345" y="0" width="3" height="15">
+					<printWhenExpression><![CDATA[$F{dInTimeTwo}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="545" y="0" width="3" height="15">
+					<printWhenExpression><![CDATA[$F{dOutTimeTwo}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[,]]></text>
+			</staticText>
+			<textField pattern="dd-MM-yy">
+				<reportElement x="403" y="0" width="42" height="15">
+					<printWhenExpression><![CDATA[$F{dOutTimeOne}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dOutTimeOne}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="448" y="0" width="42" height="15">
+					<printWhenExpression><![CDATA[$F{dOutTimeTwo}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dOutTimeTwo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="hh:mm:ss a" isBlankWhenNull="true">
+				<reportElement x="348" y="0" width="53" height="15">
+					<printWhenExpression><![CDATA[$F{dInTimeOne}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dInTimeOne}]]></textFieldExpression>
+			</textField>
+			<textField pattern="hh:mm:ss a" isBlankWhenNull="true">
+				<reportElement x="548" y="0" width="53" height="15">
+					<printWhenExpression><![CDATA[$F{dOutTimeOne}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dOutTimeOne}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="166" y="0" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="445" y="0" width="3" height="15">
+					<printWhenExpression><![CDATA[$F{dOutTimeTwo}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[,]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="168" y="0" width="77" height="15"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vShiftName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yy">
+				<reportElement x="123" y="1" width="42" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{Date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15">
+			<textField isStretchWithOverflow="true" pattern="dd-MM-yyyy hh:mm:ss aaa">
+				<reportElement x="1" y="4" width="109" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{SysDate}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="792" y="4" width="33" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="750" y="4" width="42" height="11"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="111" y="4" width="101" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{username}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="212" y="4" width="538" height="11" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Developed by: E-Vision Software Ltd. ||  Mob:01755-506044 || www.eslctg.com]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

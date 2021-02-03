@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptRawMaterials" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="786" leftMargin="36" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="company" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="phone" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<parameter name="UserIp" class="java.lang.String"/>
+	<parameter name="sql" class="java.lang.String">
+		<defaultValueExpression><![CDATA["select * from tbRawPurchaseInfo"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="786" height="15" forecolor="#333333"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{company}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="14" width="786" height="10" forecolor="#333333"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="25" width="786" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{phone}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="8" y="3" width="119" height="38"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}+"rjsl.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="283" y="1" width="201" height="16" forecolor="#666666" backcolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#333333"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="1" width="201" height="17" forecolor="#333333"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item Stock(By Value)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="31" width="786" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<line>
+				<reportElement x="39" y="-1" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="-1" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="345" y="15" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="670" y="-1" width="1" height="17"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="786" y="-1" width="1" height="17"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="40" y="15" width="746" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="1" y="30" width="786" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="13" width="1" height="18"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="1" y="0" width="38" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<line>
+				<reportElement x="786" y="16" width="1" height="14"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="670" y="0" width="116" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Closing Stock]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="16" width="46" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<line>
+				<reportElement x="740" y="15" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="706" y="16" width="34" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="671" y="16" width="34" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<line>
+				<reportElement x="670" y="15" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="428" y="0" width="241" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Issue Information]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="624" y="16" width="46" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<line>
+				<reportElement x="623" y="16" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="589" y="16" width="34" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rate]]></text>
+			</staticText>
+			<line>
+				<reportElement x="588" y="15" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="558" y="16" width="30" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<line>
+				<reportElement x="557" y="16" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="465" y="16" width="93" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Department name]]></text>
+			</staticText>
+			<line>
+				<reportElement x="464" y="16" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="427" y="15" width="37" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Req  No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="0" width="116" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Received Information]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="381" y="16" width="46" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<line>
+				<reportElement x="380" y="16" width="1" height="14"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="346" y="16" width="34" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rate]]></text>
+			</staticText>
+			<line>
+				<reportElement x="310" y="15" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="311" y="16" width="34" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<line>
+				<reportElement x="310" y="-1" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="427" y="15" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="427" y="-1" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="40" y="0" width="270" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Opening Stock Information]]></text>
+			</staticText>
+			<line>
+				<reportElement x="705" y="15" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="40" y="16" width="34" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<line>
+				<reportElement x="73" y="15" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="74" y="16" width="34" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rate]]></text>
+			</staticText>
+			<line>
+				<reportElement x="107" y="15" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="107" y="16" width="46" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<line>
+				<reportElement x="153" y="15" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="154" y="16" width="32" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ch.No]]></text>
+			</staticText>
+			<line>
+				<reportElement x="186" y="16" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="187" y="16" width="123" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Supplier Name]]></text>
+			</staticText>
+			<line>
+				<reportElement x="427" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="39" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="310" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="12" width="786" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="107" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="345" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="464" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="380" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="705" y="0" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="740" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="786" y="-1" width="1" height="14"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="670" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="73" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="153" y="-2" width="1" height="14"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="186" y="-1" width="1" height="14"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="427" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="557" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="623" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="588" y="-2" width="1" height="14"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="694" y="4" width="49" height="12" forecolor="#000000"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="9" y="4" width="69" height="12" forecolor="#000000"/>
+				<textElement>
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="743" y="4" width="40" height="12" forecolor="#000000"/>
+				<textElement>
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="182" y="4" width="512" height="12" forecolor="#000000"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<text><![CDATA[Software Solution by : E-Vision Software Limited. Tel: 2522414, 2523219|| Mob:01755506044]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="85" y="4" width="49" height="12"/>
+				<textElement>
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{UserName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="4" width="43" height="12"/>
+				<textElement>
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{UserIp}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

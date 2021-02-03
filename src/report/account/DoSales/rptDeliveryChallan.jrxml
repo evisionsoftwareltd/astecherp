@@ -1,0 +1,948 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptDeliveryChallan" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="559" leftMargin="18" rightMargin="18" topMargin="43" bottomMargin="10" isSummaryWithPageHeaderAndFooter="true">
+	<property name="ireport.zoom" value="1.3310000000000115"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="company" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="phone" class="java.lang.String"/>
+	<parameter name="sql" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["select DCD.vChallanNo,DCD.vGatePassNo,DCD.vProductId,DCD.vProductName,(select vFgCode from tbFinishedProductInfo where vProductId = DCD.vProductId) productCode,DCD.mChallanQty,DCD.vProductUnit,(select vSizeName from tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId) vBox1,"+
+					" DCI.vPartyName,(select partyCode from tbPartyInfo where DCI.vPartyId = partyCode)pCode,DCI.dEntryTime,DCI.vUserName,DCI.vPartyAddress,DCI.vPartyMobile,dCD.vDoNo,"+
+					" dCD.dDoDate,DCI.dChallanDate,DCI.vDelChallanNo,DCI.vVatChallanNo,DCI.vDriverName,DCI.vDriverMobile,"+
+					" DCI.vTruckNo,DCI.vDestination,DCI.vRemarks,'Head Office Copy' vCopy,'DELIVERY CHALLAN' rptHeader, " +
+					"(select Cast(vSizeName as int) from tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId) vBox,ISNULL(case when CONVERT(money,(select vSizeName from tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))>0 " +
+					"then DCD.mChallanQty/CONVERT(money,(select vSizeName from tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))" +
+					"end,0)  vBox,ISNULL(case when CONVERT(money,(select vSizeName from tbFinishedProductInfo fi" +
+					" where dcd.vProductId = fi.vProductId))>0 then DCD.mChallanQty%CONVERT(money,(select vSizeName from" +
+					" tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))end,0) vPcs from tbDeliveryChallanDetails as DCD inner join"+
+					" tbDeliveryChallanInfo as DCI on DCI.vGatePassNo=DCD.vGatePassNo where DCD.vChallanNo like 'CH-07/16-46/28' union all"+
+
+					" select DCD.vChallanNo,DCD.vGatePassNo,DCD.vProductId,DCD.vProductName,(select vFgCode from tbFinishedProductInfo where vProductId = DCD.vProductId) productCode,DCD.mChallanQty,DCD.vProductUnit,(select vSizeName from tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId) vBox1,"+
+					" DCI.vPartyName,(select partyCode from tbPartyInfo where DCI.vPartyId = partyCode)pCode,DCI.dEntryTime,DCI.vUserName,DCI.vPartyAddress,DCI.vPartyMobile,dCD.vDoNo,"+
+					" dCD.dDoDate,DCI.dChallanDate,DCI.vDelChallanNo,DCI.vVatChallanNo,DCI.vDriverName,DCI.vDriverMobile,"+
+					" DCI.vTruckNo,DCI.vDestination,DCI.vRemarks,'Customer Copy 1' vCopy,'DELIVERY CHALLAN' rptHeader,(select Cast(vSizeName as int) from " +
+					"tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId) vBox,ISNULL(case when CONVERT(money,(select vSizeName from" +
+					" tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))>0 then DCD.mChallanQty/CONVERT(money,(select vSizeName from" +
+					" tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))end,0)  vBox,ISNULL(case when CONVERT(money,(select vSizeName from " +
+					"tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))>0 then DCD.mChallanQty%CONVERT(money,(select vSizeName from" +
+					" tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))end,0) vPcs from tbDeliveryChallanDetails as DCD inner join"+
+					" tbDeliveryChallanInfo as DCI on DCI.vGatePassNo=DCD.vGatePassNo where DCD.vChallanNo like 'CH-07/16-46/28' union all"+
+
+					" select DCD.vChallanNo,DCD.vGatePassNo,DCD.vProductId,DCD.vProductName,(select vFgCode from tbFinishedProductInfo where vProductId = DCD.vProductId) productCode,DCD.mChallanQty,DCD.vProductUnit,(select vSizeName from tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId) vBox1,DCI.vPartyName,(select partyCode from tbPartyInfo where DCI.vPartyId = partyCode)pCode,"+
+					" DCI.dEntryTime,DCI.vUserName,DCI.vPartyAddress,DCI.vPartyMobile,dCD.vDoNo,dCD.dDoDate,DCI.dChallanDate,"+
+					" DCI.vDelChallanNo,DCI.vVatChallanNo,DCI.vDriverName,DCI.vDriverMobile,DCI.vTruckNo,DCI.vDestination,DCI.vRemarks,'Customer Copy 2' vCopy,'DELIVERY CHALLAN' rptHeader, " +
+					"(select Cast(vSizeName as int) from tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId) vBox,ISNULL(case when CONVERT(money,(select vSizeName from " +
+					"tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))>0 then DCD.mChallanQty/CONVERT(money,(select vSizeName from" +
+					" tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))end,0)  vBox,ISNULL(case when CONVERT(money,(select vSizeName" +
+					" from tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))>0 then DCD.mChallanQty%CONVERT(money,(select vSizeName" +
+					" from tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId)) end,0) vPcs from"+
+					" tbDeliveryChallanDetails as DCD inner join tbDeliveryChallanInfo as DCI on DCI.vGatePassNo=DCD.vGatePassNo where"+
+					" DCD.vChallanNo like 'CH-07/16-46/28' union all"+
+
+					" select DCD.vChallanNo,DCD.vGatePassNo,DCD.vProductId,DCD.vProductName,(select vFgCode from tbFinishedProductInfo where vProductId = DCD.vProductId) productCode,DCD.mChallanQty,DCD.vProductUnit,(select vSizeName from tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId) vBox1,"+
+					" DCI.vPartyName,(select partyCode from tbPartyInfo where DCI.vPartyId = partyCode)pCode,DCI.dEntryTime,DCI.vUserName,DCI.vPartyAddress,DCI.vPartyMobile,dCD.vDoNo,"+
+					" dCD.dDoDate,DCI.dChallanDate,DCI.vDelChallanNo,DCI.vVatChallanNo,DCI.vDriverName,DCI.vDriverMobile,"+
+					" DCI.vTruckNo,DCI.vDestination,DCI.vRemarks,'Customer Copy 3' vCopy,'DELIVERY CHALLAN' rptHeader,(select Cast(vSizeName as int) from " +
+					"tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId) vBox,ISNULL(case when CONVERT(money,(select vSizeName from" +
+					" tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))>0 then DCD.mChallanQty/CONVERT(money,(select vSizeName" +
+					" from tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))end,0)  vBox,ISNULL(case when CONVERT(money,(select " +
+					"vSizeName from tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))>0 then DCD.mChallanQty%CONVERT(money,(select" +
+					" vSizeName from tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))end,0) vPcs from"+
+					" tbDeliveryChallanDetails as DCD inner join tbDeliveryChallanInfo as DCI on DCI.vGatePassNo=DCD.vGatePassNo where"+
+					" DCD.vChallanNo like 'CH-07/16-46/28' union all"+
+
+					" select DCD.vChallanNo,DCD.vGatePassNo,DCD.vProductId,DCD.vProductName,(select vFgCode from tbFinishedProductInfo where vProductId = DCD.vProductId) productCode,DCD.mChallanQty,DCD.vProductUnit,(select vSizeName from tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId) vBox1,"+
+					" DCI.vPartyName,(select partyCode from tbPartyInfo where DCI.vPartyId = partyCode)pCode,DCI.dEntryTime,DCI.vUserName,DCI.vPartyAddress,DCI.vPartyMobile,dCD.vDoNo,"+
+					" dCD.dDoDate,DCI.dChallanDate,DCI.vDelChallanNo,DCI.vVatChallanNo,DCI.vDriverName,DCI.vDriverMobile,"+
+					" DCI.vTruckNo,DCI.vDestination,DCI.vRemarks,DCD.vGatePassNo as vCopy,'GATE PASS' rptHeader,(select Cast(vSizeName as int) from tbFinishedProductInfo fi " +
+					"where dcd.vProductId = fi.vProductId) vBox,ISNULL(case when CONVERT(money,(select vSizeName from tbFinishedProductInfo fi" +
+					" where dcd.vProductId = fi.vProductId))>0 then DCD.mChallanQty/CONVERT(money,(select vSizeName from tbFinishedProductInfo fi" +
+					" where dcd.vProductId = fi.vProductId)) end,0)  vBox,ISNULL(case when CONVERT(money,(select vSizeName from " +
+					"tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))>0 then DCD.mChallanQty%CONVERT(money,(select vSizeName " +
+					"from tbFinishedProductInfo fi where dcd.vProductId = fi.vProductId))end,0) vPcs from"+
+					" tbDeliveryChallanDetails as DCD inner join tbDeliveryChallanInfo as DCI on DCI.vGatePassNo=DCD.vGatePassNo where"+
+					" DCD.vChallanNo like 'CH-07/16-46/28'"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="userName" class="java.lang.String"/>
+	<parameter name="user" class="java.lang.String"/>
+	<parameter name="Date" class="java.util.Date"/>
+	<parameter name="copy" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="vChallanNo" class="java.lang.String"/>
+	<field name="vGatePassNo" class="java.lang.String"/>
+	<field name="vProductId" class="java.lang.String"/>
+	<field name="vProductName" class="java.lang.String"/>
+	<field name="productCode" class="java.lang.String"/>
+	<field name="mChallanQty" class="java.math.BigDecimal"/>
+	<field name="vProductUnit" class="java.lang.String"/>
+	<field name="vBox1" class="java.lang.String"/>
+	<field name="vPartyName" class="java.lang.String"/>
+	<field name="pCode" class="java.lang.String"/>
+	<field name="dEntryTime" class="java.sql.Timestamp"/>
+	<field name="vUserName" class="java.lang.String"/>
+	<field name="vPartyAddress" class="java.lang.String"/>
+	<field name="vPartyMobile" class="java.lang.String"/>
+	<field name="vDoNo" class="java.lang.String"/>
+	<field name="dDoDate" class="java.sql.Timestamp"/>
+	<field name="dChallanDate" class="java.sql.Timestamp"/>
+	<field name="vDelChallanNo" class="java.lang.String"/>
+	<field name="vVatChallanNo" class="java.lang.String"/>
+	<field name="vDriverName" class="java.lang.String"/>
+	<field name="vDriverMobile" class="java.lang.String"/>
+	<field name="vTruckNo" class="java.lang.String"/>
+	<field name="vDestination" class="java.lang.String"/>
+	<field name="vRemarks" class="java.lang.String"/>
+	<field name="vCopy" class="java.lang.String"/>
+	<field name="rptHeader" class="java.lang.String"/>
+	<field name="vBox" class="java.lang.Integer"/>
+	<field name="vPcs" class="java.math.BigDecimal"/>
+	<variable name="sl" class="java.lang.Integer" resetType="Group" resetGroup="grpName" incrementType="Group" incrementGroup="grpName" calculation="Sum">
+		<variableExpression><![CDATA[$V{sl}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="sl_1" class="java.lang.Integer" incrementType="Report">
+		<variableExpression><![CDATA[$V{sl}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="Total" class="java.math.BigDecimal" resetType="Group" resetGroup="grpName" calculation="Sum">
+		<variableExpression><![CDATA[$F{mChallanQty}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="GrandTotal" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{mChallanQty}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="customerCopy" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{customerCopy}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="copy" class="java.lang.String">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<group name="grpName" isStartNewColumn="true" isStartNewPage="true" isReprintHeaderOnEachPage="true" keepTogether="true">
+		<groupExpression><![CDATA[$P{copy}!="Single Copy"?$F{vCopy}:$F{vChallanNo}]]></groupExpression>
+		<groupHeader>
+			<band height="243">
+				<staticText>
+					<reportElement x="1" y="152" width="58" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Truck No.]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="448" y="75" width="109" height="15"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vChallanNo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="66" y="167" width="277" height="15"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vDestination}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="59" y="75" width="6" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="66" y="90" width="185" height="32"/>
+					<box topPadding="1" leftPadding="2"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vPartyAddress}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="373" y="160" width="67" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[P.O. Date ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="373" y="135" width="67" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[P.O. No ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="66" y="75" width="227" height="15"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vPartyName}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="59" y="167" width="6" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="59" y="137" width="6" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField pattern="dd-MM-yyyy">
+					<reportElement x="448" y="105" width="109" height="15"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{dChallanDate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="66" y="122" width="185" height="15"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vDriverName}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="1" y="167" width="58" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Destination]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="66" y="137" width="185" height="15"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vDriverMobile}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="440" y="105" width="6" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="440" y="90" width="6" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="90" width="58" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Address]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="440" y="160" width="6" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField pattern="h.mm.ss aaa">
+					<reportElement x="448" y="120" width="109" height="15"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{dChallanDate}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="1" y="122" width="58" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Driver Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="137" width="58" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Mobile]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="440" y="120" width="6" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="440" y="135" width="6" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="75" width="58" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Party Name]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="66" y="152" width="185" height="15"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vTruckNo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="59" y="152" width="6" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="373" y="105" width="67" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Challan Date]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="448" y="90" width="109" height="15"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vVatChallanNo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="373" y="75" width="67" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Challan No]]></text>
+				</staticText>
+				<textField pattern="dd-MM-yyyy">
+					<reportElement x="448" y="160" width="109" height="15">
+						<printWhenExpression><![CDATA[$F{vDoNo}.toString().equals("Without PO")?false:true]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{dDoDate}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="59" y="122" width="6" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="373" y="90" width="67" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[VAT Challan No]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="373" y="120" width="67" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Challan Time]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="440" y="75" width="6" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="448" y="135" width="109" height="24" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[$F{vDoNo}.toString().equals(" ")?print("Without DO"):true]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="2"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vDoNo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="59" y="90" width="6" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="494" y="215" width="1" height="27"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="452" y="215" width="1" height="27"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="350" y="200" width="1" height="42"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="200" width="1" height="43"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="98" y="200" width="1" height="43"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="559" y="200" width="1" height="42"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="453" y="215" width="41" height="27"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Pcs]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="351" y="201" width="208" height="14"/>
+					<box>
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Delievery Qty]]></text>
+				</staticText>
+				<line>
+					<reportElement x="401" y="215" width="1" height="27"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="402" y="215" width="50" height="27"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Per Box(Qty)]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="200" width="560" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="28" y="201" width="70" height="41"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Code]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="201" width="26" height="41"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SL#]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="495" y="215" width="64" height="27"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Quanty]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="351" y="215" width="50" height="27"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Box/Pack/Roll]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="242" width="560" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="27" y="200" width="1" height="43"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="99" y="201" width="251" height="41"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Description Of Goods]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="16" width="559" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="0" width="559" height="16"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{company}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="30" width="559" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{phone}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="381" y="0" width="177" height="16"/>
+					<box leftPadding="4">
+						<pen lineWidth="0.5" lineStyle="Solid"/>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vCopy}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="52" width="559" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{rptHeader}]]></textFieldExpression>
+				</textField>
+				<rectangle radius="10">
+					<reportElement mode="Transparent" x="200" y="52" width="158" height="14"/>
+				</rectangle>
+				<image scaleImage="FillFrame">
+					<reportElement x="1" y="1" width="100" height="40"/>
+					<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+				</image>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="193" splitType="Stretch">
+				<line>
+					<reportElement x="0" y="160" width="560" height="1" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="559" y="0" width="1" height="160"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="0" width="1" height="160"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="27" y="0" width="1" height="160"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="98" y="0" width="1" height="160"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="350" y="0" width="1" height="159"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="452" y="0" width="1" height="159"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="494" y="0" width="1" height="159"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="401" y="0" width="1" height="160"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<textField pattern="#,##0">
+					<reportElement x="512" y="161" width="48" height="17"/>
+					<box rightPadding="2">
+						<bottomPen lineWidth="1.75" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{Total}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="279" y="161" width="71" height="17"/>
+					<box>
+						<bottomPen lineWidth="1.75" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Grand Total : ]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="98" y="-1" width="1" height="17"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="350" y="-1" width="1" height="17"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="99" y="0" width="251" height="16" isPrintWhenDetailOverflows="true"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vProductName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="26" height="16"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{sl}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="559" y="0" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="401" y="0" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="452" y="0" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="541" y="0" width="18" height="16"/>
+				<box topPadding="0" leftPadding="2" rightPadding="0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vProductUnit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="495" y="0" width="46" height="16"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{mChallanQty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement x="351" y="0" width="50" height="16">
+					<printWhenExpression><![CDATA[$F{vBox}>0?true:false]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vBox}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement x="453" y="0" width="41" height="16">
+					<printWhenExpression><![CDATA[$F{vPcs}>0?true:false]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{vPcs}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="27" y="-1" width="1" height="17"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="28" y="0" width="70" height="16" isPrintWhenDetailOverflows="true"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{productCode}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="494" y="0" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0">
+				<reportElement x="402" y="0" width="29" height="16"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vBox1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="431" y="0" width="21" height="16"/>
+				<box topPadding="0" leftPadding="2" rightPadding="0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vProductUnit}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="231" splitType="Prevent">
+			<staticText>
+				<reportElement x="59" y="2" width="6" height="21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="88" width="555" height="48"/>
+				<box topPadding="2" leftPadding="8">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="11" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Any claim against shortage of damage must be notified in writing with in 24 hours of receipt of goods, otherwise it will be assumed that goods here been received in order and exactly / entirely as per this challan.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="2" y="29" width="555" height="53"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Remarks: "+$F{vRemarks}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="453" y="136" width="105" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[E. & O.E]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="207" width="100" height="14"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Store Officer]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="220" y="150" width="100" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["For "+$P{company}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="207" width="100" height="14"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Received With Sign]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="65" y="2" width="326" height="21"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pCode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="458" y="207" width="100" height="14"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Authorized By]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="458" y="151" width="100" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["For "+$P{company}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="2" width="58" height="21"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SPL Code]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="221" width="560" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField evaluationTime="Report">
+				<reportElement x="530" y="222" width="27" height="9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy hh:mm.ss aaa">
+				<reportElement x="1" y="222" width="85" height="9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{Date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="222" width="100" height="9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{user}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="237" y="222" width="219" height="9" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<text><![CDATA[Developed by: E-Vision Software Ltd. || Mob:01755-506044 || www.eslctg.com]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="492" y="222" width="37" height="9"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Immediate"/>
+	</summary>
+</jasperReport>

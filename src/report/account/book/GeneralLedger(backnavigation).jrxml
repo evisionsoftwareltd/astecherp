@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="GeneralLedger" language="groovy" pageWidth="595" pageHeight="842" columnWidth="531" leftMargin="34" rightMargin="30" topMargin="20" bottomMargin="30">
+	<property name="ireport.zoom" value="1.652892561983472"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fromDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2010-07-01"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="toDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2011-01-01"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="comName" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="phoneFax" class="java.lang.String"/>
+	<parameter name="fromTo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["01-07-10 to 07-01-11"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ledgerName" class="java.lang.Object">
+		<defaultValueExpression><![CDATA["Exim Bank"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ledgerId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["AL1"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ledgerPath" class="java.lang.String"/>
+	<parameter name="withNarration" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+	</parameter>
+	<parameter name="costCentre" class="java.lang.String"/>
+	<parameter name="costId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["%"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="companyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sql" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["SELECT * FROM dbo.rptCostLedger('2013-07-01','2014-02-03','EL3','U-3','1') order by date,convert(Numeric,autoid)"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="url" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["http://localhost:7777/astechac/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="attach" class="java.lang.String">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="urlLink" class="java.lang.String"/>
+	<parameter name="userName" class="java.lang.String"/>
+	<parameter name="userIp" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="AutoId" class="java.lang.Integer"/>
+	<field name="Ledger_Id" class="java.lang.String"/>
+	<field name="ledger_name" class="java.lang.String"/>
+	<field name="voucher_no" class="java.lang.String"/>
+	<field name="date" class="java.sql.Timestamp"/>
+	<field name="DrAmount" class="java.math.BigDecimal"/>
+	<field name="CrAmount" class="java.math.BigDecimal"/>
+	<field name="Narration" class="java.lang.String"/>
+	<field name="attachBill" class="java.lang.String"/>
+	<field name="attachChequeBill" class="java.lang.String"/>
+	<variable name="bal" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{CrAmount}+$V{ttlCrd} -$F{DrAmount}-$V{ttlDeb}]]></variableExpression>
+	</variable>
+	<variable name="ttlDeb" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{DrAmount}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="ttlCrd" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{CrAmount}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="ttlBal" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{bal}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="118" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="105" width="531" height="13"/>
+				<staticText>
+					<reportElement x="0" y="0" width="39" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="50" y="1" width="65" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Voucher No]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="127" y="1" width="180" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Particular]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="310" y="1" width="70" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Dr. Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="383" y="1" width="70" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cr. Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="456" y="1" width="75" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Balance]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="0" width="531" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line direction="BottomUp">
+					<reportElement x="454" y="1" width="1" height="12"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line direction="BottomUp">
+					<reportElement x="381" y="1" width="1" height="12"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line direction="BottomUp">
+					<reportElement x="308" y="1" width="1" height="12"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line direction="BottomUp">
+					<reportElement x="125" y="1" width="1" height="12"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line direction="BottomUp">
+					<reportElement x="38" y="1" width="1" height="12"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line direction="BottomUp">
+					<reportElement x="0" y="0" width="1" height="12"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="12" width="531" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line direction="BottomUp">
+					<reportElement x="530" y="0" width="1" height="13"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+			</frame>
+			<textField>
+				<reportElement x="0" y="29" width="515" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{phoneFax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="16" width="515" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="515" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{comName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="44" width="515" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="46" width="515" height="14"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Statement of Ledger]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="61" width="515" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["From : "+$P{fromTo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="80" width="57" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ledger Name : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="59" y="80" width="455" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ledgerName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="59" y="93" width="455" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ledgerPath}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="93" width="57" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ledger Path : ]]></text>
+			</staticText>
+			<image scaleImage="FillFrame" isLazy="true" onErrorType="Blank">
+				<reportElement x="0" y="0" width="100" height="30"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="12" splitType="Stretch">
+			<printWhenExpression><![CDATA[new java.lang.Boolean($V{PAGE_NUMBER}.intValue()>1?true:false)]]></printWhenExpression>
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" isPrintRepeatedValues="false" x="0" y="0" width="530" height="12" isRemoveLineWhenBlank="true"/>
+				<staticText>
+					<reportElement stretchType="RelativeToBandHeight" x="1" y="0" width="295" height="12"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Balance brought from the previous page]]></text>
+				</staticText>
+				<textField pattern="#,##0.00">
+					<reportElement stretchType="RelativeToBandHeight" x="382" y="0" width="69" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{ttlDeb}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement stretchType="RelativeToBandHeight" x="311" y="0" width="67" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{ttlCrd}]]></textFieldExpression>
+				</textField>
+				<line direction="BottomUp">
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="1" height="12"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line direction="BottomUp">
+					<reportElement stretchType="RelativeToBandHeight" x="308" y="0" width="1" height="12"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line direction="BottomUp">
+					<reportElement stretchType="RelativeToBandHeight" x="381" y="0" width="1" height="12"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line direction="BottomUp">
+					<reportElement stretchType="RelativeToBandHeight" x="454" y="0" width="1" height="12"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line direction="BottomUp">
+					<reportElement stretchType="RelativeToBandHeight" x="529" y="0" width="1" height="12"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="11" width="530" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<textField pattern="#,##0.00;(-#,##0.00)">
+					<reportElement x="455" y="0" width="72" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{bal}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField pattern="dd-MM-yy">
+				<reportElement isPrintRepeatedValues="false" x="3" y="0" width="36" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField hyperlinkType="Reference" hyperlinkTarget="Blank">
+				<reportElement isPrintRepeatedValues="false" x="40" y="0" width="65" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" "+$F{voucher_no}]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA[$P{url}+"voucher="+$F{voucher_no}]]></hyperlinkReferenceExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="128" y="0" width="179" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ledger_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="311" y="0" width="67" height="12">
+					<printWhenExpression><![CDATA[new java.lang.Boolean($F{CrAmount}.doubleValue()>0?true:false)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{CrAmount}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="454" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="381" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="308" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="125" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="38" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="530" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="455" y="0" width="72" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{bal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="382" y="0" width="69" height="12">
+					<printWhenExpression><![CDATA[new java.lang.Boolean($F{DrAmount}.doubleValue()>0?true:false)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{DrAmount}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hyperlinkType="Reference" hyperlinkTarget="Blank">
+				<reportElement x="108" y="0" width="14" height="12">
+					<printWhenExpression><![CDATA[($F{attachBill}.equals("0") || $F{attachBill}.equals("") )?false:true]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.lang.String"><![CDATA[$P{attach}+"attach.jpg"]]></imageExpression>
+				<hyperlinkReferenceExpression><![CDATA[$P{urlLink}+$F{attachBill}]]></hyperlinkReferenceExpression>
+			</image>
+		</band>
+		<band height="12">
+			<printWhenExpression><![CDATA[$P{withNarration}]]></printWhenExpression>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="128" y="0" width="179" height="11" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true">
+					<printWhenExpression><![CDATA[new Boolean($F{Narration}.length()>0?true:false)]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["("+$F{Narration}.trim()+")"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="127" y="11" width="180" height="1" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="1" height="12" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="38" y="0" width="1" height="12" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="125" y="0" width="1" height="12" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="308" y="0" width="1" height="12" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="381" y="0" width="1" height="12" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="454" y="0" width="1" height="12" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="530" y="0" width="1" height="12" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<image scaleImage="FillFrame" hyperlinkType="Reference" hyperlinkTarget="Blank">
+				<reportElement x="108" y="0" width="14" height="12">
+					<printWhenExpression><![CDATA[($F{attachChequeBill}.equals("0") || $F{attachChequeBill}.equals("") )?false:true]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.lang.String"><![CDATA[$P{attach}+"attach.jpg"]]></imageExpression>
+				<hyperlinkReferenceExpression><![CDATA[$P{urlLink}+$F{attachChequeBill}]]></hyperlinkReferenceExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="12" splitType="Stretch">
+			<printWhenExpression><![CDATA[new Boolean(!$V{PAGE_NUMBER}.equals($P{REPORT_PARAMETERS_MAP}.get("LastPageNumber")))]]></printWhenExpression>
+			<textField pattern="#,##0.00">
+				<reportElement x="382" y="0" width="69" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{ttlDeb}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="311" y="0" width="67" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{ttlCrd}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="0" width="295" height="12">
+					<printWhenExpression><![CDATA[new Boolean(!$V{PAGE_NUMBER}.equals($P{REPORT_PARAMETERS_MAP}.get("LastPageNumber")))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Balance transfer to the next page]]></text>
+			</staticText>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="455" y="0" width="72" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{bal}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="531" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="11" width="531" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="0" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="308" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="381" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="454" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="530" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<textField pattern="dd-MM-yy h:mm:ss a">
+				<reportElement x="115" y="3" width="106" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="236" y="3" width="193" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Developed by: E-Vision Software Ltd. || 01755-506044]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="506" y="3" width="23" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="456" y="3" width="50" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="2" width="531" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="2" y="3" width="108" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{userName}+" || "+$P{userIp}+" ||  "]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="14" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement x="311" y="0" width="67" height="12">
+					<printWhenExpression><![CDATA[new java.lang.Boolean(!$V{PAGE_NUMBER}.equals($P{REPORT_PARAMETERS_MAP}.get("LastPageNumber")))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{ttlCrd}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="455" y="-1" width="72" height="12"/>
+				<box bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{bal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="382" y="0" width="69" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{ttlDeb}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="382" y="11" width="70" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="311" y="11" width="70" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="86" y="13" width="100" height="1">
+					<printWhenExpression><![CDATA[new Boolean($P{REPORT_PARAMETERS_MAP}.put("LastPageNumber",$V{PAGE_NUMBER}).equals("dummyPrintWhen"))]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="531" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="13" width="531" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="0" y="0" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="530" y="0" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="308" y="0" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="454" y="0" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="381" y="0" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="balancesheetDetails" language="groovy" pageWidth="595" pageHeight="792" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.415765000000005"/>
+	<property name="ireport.x" value="494"/>
+	<property name="ireport.y" value="113"/>
+	<parameter name="clDate" class="java.util.Date"/>
+	<parameter name="comName" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="phoneFax" class="java.lang.String"/>
+	<parameter name="companyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sql" class="java.lang.String">
+		<defaultValueExpression><![CDATA[" SELECT * FROM dbo.funBalanceSheetDetails('2015-09-09', '1') order by HeadId,SubGroupName,LedgerId "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="url" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost:8989/astechac"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="userIp" class="java.lang.String">
+		<defaultValueExpression><![CDATA["172.168.10.196"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="userName" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Razib kanti"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="usdRate" class="java.lang.Double">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="SLNo" class="java.lang.Integer"/>
+	<field name="LedgerId" class="java.lang.String"/>
+	<field name="LedgerName" class="java.lang.String"/>
+	<field name="HeadId" class="java.lang.String"/>
+	<field name="HeadName" class="java.lang.String"/>
+	<field name="SubGroupName" class="java.lang.String"/>
+	<field name="Amount" class="java.math.BigDecimal"/>
+	<field name="Notes" class="java.lang.String"/>
+	<variable name="totalAmount" class="java.lang.Double" resetType="Group" resetGroup="Head" calculation="Sum">
+		<variableExpression><![CDATA[$F{Amount}]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="totalSubGroup" class="java.math.BigDecimal" resetType="Group" resetGroup="SubGroupName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Amount}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="Head">
+		<groupExpression><![CDATA[$F{HeadName}]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<textField>
+					<reportElement x="39" y="0" width="495" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{HeadName}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="4" y="0" width="30" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Notes}+"."]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="21">
+				<textField pattern="#,##0.00;(#,##0.00)">
+					<reportElement x="407" y="0" width="127" height="18"/>
+					<box>
+						<bottomPen lineWidth="1.75" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{totalAmount}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="SubGroupName">
+		<groupExpression><![CDATA[$F{SubGroupName}]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<printWhenExpression><![CDATA[$F{SubGroupName}.toString().equals("")?false:true]]></printWhenExpression>
+				<textField>
+					<reportElement x="54" y="0" width="480" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{SubGroupName}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="18">
+				<printWhenExpression><![CDATA[$F{SubGroupName}.toString().equals("")?false:true]]></printWhenExpression>
+				<textField pattern="#,##0.00;(#,##0.00)">
+					<reportElement x="407" y="0" width="127" height="16"/>
+					<box rightPadding="2">
+						<bottomPen lineWidth="1.75" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{totalSubGroup}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="104" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="535" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{comName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="16" width="535" height="14"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="30" width="535" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{phoneFax}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="45" width="535" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[BALANCE SHEET NOTES]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="44" width="534" height="2"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<image scaleImage="FillFrame" isLazy="true" onErrorType="Blank">
+				<reportElement x="0" y="0" width="100" height="30"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="59" width="535" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["As on "+new java.text.SimpleDateFormat("MMMMM dd, yyyy").format($P{clDate})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="407" y="87" width="127" height="16">
+					<printWhenExpression><![CDATA[$P{usdRate}>1?true:false]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{usdRate}>1?"USD":""]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField hyperlinkType="Reference" hyperlinkTarget="Blank">
+				<reportElement x="67" y="0" width="340" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{LedgerName}]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA[$P{url}+"ledger="+$F{LedgerId}]]></hyperlinkReferenceExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="407" y="0" width="127" height="15"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="10" width="535" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<textField evaluationTime="Report">
+				<reportElement x="523" y="10" width="11" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="10" width="208" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{userName}+" || "+$P{userIp}+" ||  "+ new java.text.SimpleDateFormat("dd-MM-yyyy hh:mm a").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="474" y="10" width="50" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="209" y="10" width="264" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<text><![CDATA[Software Solution by : E-Vision Software Ltd. || Helpline : 01755-506044]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="35" y="0" width="71" height="9">
+					<printWhenExpression><![CDATA[$P{usdRate}>1?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{usdRate}+" BDT"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="0" width="33" height="9">
+					<printWhenExpression><![CDATA[$P{usdRate}>1?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="false" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[* 1 USD =]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

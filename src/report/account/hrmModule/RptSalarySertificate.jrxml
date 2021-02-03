@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RptSalarySertificate" language="groovy" pageWidth="595" pageHeight="842" columnWidth="523" leftMargin="36" rightMargin="36" topMargin="36" bottomMargin="36" isSummaryNewPage="true">
+	<property name="ireport.zoom" value="1.5000000000000007"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="company" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="sql" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["select vEmployeeName,employeeCode,b.designationName,   convert(varchar,dJoiningDate,113) dJoiningDate,mMonthlySalary,mHouseRent,mMedicalAllowance,  mConAllowance,mOthersAllowance,convert(varchar,convert(date,CURRENT_TIMESTAMP),113)   as Curdate from tbEmployeeInfo a  inner join tbDesignationInfo b on a.vDesignationId=b.designationId"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="section" class="java.lang.String"/>
+	<parameter name="username" class="java.lang.String"/>
+	<parameter name="phone" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="month" class="java.lang.String"/>
+	<parameter name="SysDate" class="java.util.Date"/>
+	<parameter name="BankName" class="java.lang.String"/>
+	<parameter name="BranchName" class="java.lang.String"/>
+	<parameter name="AccountNo" class="java.lang.String"/>
+	<parameter name="year" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\workspace\\uptd\\src\\report\\account\\hrmModule\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Date" class="java.lang.String"/>
+	<parameter name="amount" class="java.lang.String"/>
+	<parameter name="InWords" class="java.lang.String"/>
+	<parameter name="refNo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="vEmployeeName" class="java.lang.String"/>
+	<field name="employeeCode" class="java.lang.String"/>
+	<field name="designationName" class="java.lang.String"/>
+	<field name="dJoiningDate" class="java.lang.String"/>
+	<field name="mMonthlySalary" class="java.math.BigDecimal"/>
+	<field name="mHouseRent" class="java.math.BigDecimal"/>
+	<field name="mMedicalAllowance" class="java.math.BigDecimal"/>
+	<field name="mConAllowance" class="java.math.BigDecimal"/>
+	<field name="mOthersAllowance" class="java.math.BigDecimal"/>
+	<field name="Curdate" class="java.lang.String"/>
+	<variable name="sl" class="java.lang.Number">
+		<variableExpression><![CDATA[$V{sl}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="currentPage" class="java.lang.String">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="598">
+			<staticText>
+				<reportElement x="0" y="51" width="523" height="41"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe Print" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Salary Certificate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="316" width="218" height="19"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[His salary particulars are given below:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="260" width="523" height="34"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[We are issuing this letter on the request of our employee and do not hold any liability on behalf of this letter or part of this letter on our company.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="125" width="523" height="26"/>
+				<box leftPadding="2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black" size="18" isBold="false"/>
+				</textElement>
+				<text><![CDATA[To whom it may concern]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="167" width="523" height="85" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["This is to certify that  "+$F{vEmployeeName}+", "+$F{employeeCode}+" is working with our company as a "+$F{designationName}+". He has been working with us since "+$F{dJoiningDate}+" and proved to be a very dedicated resource who has been very loyal to the company."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="91" y="343" width="140" height="19"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Basic]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="363" width="140" height="19"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[House Rent]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="383" width="140" height="19"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Medical]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="403" width="140" height="19"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Conveyance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="231" y="343" width="23" height="19"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[TK.]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="255" y="343" width="81" height="19"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{mMonthlySalary}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="231" y="363" width="23" height="19"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[TK.]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="255" y="363" width="81" height="19"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{mHouseRent}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="231" y="383" width="23" height="19"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[TK.]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="255" y="383" width="81" height="19"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{mMedicalAllowance}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="231" y="403" width="23" height="19"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[TK.]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="255" y="403" width="81" height="19"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{mConAllowance}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="145" y="426" width="86" height="19"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gross Total]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="255" y="426" width="81" height="19"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{mOthersAllowance}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="231" y="426" width="23" height="19"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TK.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="509" width="179" height="43"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[-------------------------------------
+Head of HR/SR. EXECUTIVE
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="337" y="426" width="23" height="19"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[/=]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="415" y="101" width="78" height="17"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="13" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Curdate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="377" y="101" width="37" height="17"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band/>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Immediate"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band/>
+	</lastPageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

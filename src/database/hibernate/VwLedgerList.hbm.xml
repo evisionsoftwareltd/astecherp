@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 11, 2011 10:26:55 AM by Hibernate Tools 3.3.0.GA -->
+<hibernate-mapping>
+    <class name="database.hibernate.VwLedgerList" table="vwLedgerList" schema="dbo" >
+        <composite-id name="id" class="database.hibernate.VwLedgerListId">
+            <key-property name="r" type="string">
+                <column name="R" length="50" />
+            </key-property>
+            <key-property name="h" type="string">
+                <column name="H" length="100" />
+            </key-property>
+            <key-property name="g" type="string">
+                <column name="G" length="100" />
+            </key-property>
+            <key-property name="s" type="string">
+                <column name="S" length="100" />
+            </key-property>
+            <key-property name="l" type="string">
+                <column name="L" length="250" />
+            </key-property>
+            <key-property name="ledgerId" type="string">
+                <column name="Ledger_Id" length="50" />
+            </key-property>
+            <key-property name="slno" type="java.lang.Integer">
+                <column name="SLNo" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

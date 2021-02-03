@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 1, 2011 4:41:33 PM by Hibernate Tools 3.3.0.GA -->
+<hibernate-mapping>
+    <class name="database.hibernate.TbCompanyInfo" table="tbCompanyInfo" schema="dbo" >
+        <id name="companyId" type="int">
+            <column name="companyId" />
+            <generator class="assigned" />
+        </id>
+        <property name="companyName" type="string">
+            <column name="companyName" unique="true" />
+        </property>
+        <property name="dseMemNo" type="string">
+            <column name="dseMemNo" />
+        </property>
+        <property name="cseMemberNo" type="string">
+            <column name="cseMemberNo" />
+        </property>
+        <property name="cdblParticularId" type="string">
+            <column name="cdblParticularId" />
+        </property>
+        <property name="phoneNo" type="string">
+            <column name="phoneNo" />
+        </property>
+        <property name="fax" type="string">
+            <column name="fax" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" />
+        </property>
+        <property name="userId" type="java.lang.Integer">
+            <column name="userId" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="userIp" length="50" />
+        </property>
+        <property name="entryTime" type="timestamp">
+            <column name="entryTime" length="23" />
+        </property>
+        <property name="imageLoc" type="string">
+            <column name="imageLoc" length="500" />
+        </property>
+    </class>
+</hibernate-mapping>

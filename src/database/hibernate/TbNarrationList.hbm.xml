@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 11, 2011 10:26:55 AM by Hibernate Tools 3.3.0.GA -->
+<hibernate-mapping>
+    <class name="database.hibernate.TbNarrationList" table="tbNarrationList" schema="dbo">
+        <id name="narrationId" type="string">
+            <column name="NarrationId" length="50" />
+            <generator class="assigned" />
+        </id>
+        <property name="narration" type="string">
+            <column name="Narration" length="100" />
+        </property>
+        <property name="voucherType" type="string">
+            <column name="VoucherType" length="50" />
+        </property>
+        <property name="slNo" type="java.lang.Integer">
+            <column name="SlNo" />
+        </property>
+    </class>
+</hibernate-mapping>

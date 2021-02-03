@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 23, 2011 3:39:26 PM by Hibernate Tools 3.3.0.GA -->
+<hibernate-mapping>
+    <class name="database.hibernate.TbAuthentication" table="tbAuthentication" schema="dbo" >
+        <id name="sl" type="int">
+            <column name="sl" />
+            <generator class="assigned" />
+        </id>
+        <property name="userId" type="java.lang.Integer">
+            <column name="userId" />
+        </property>
+        <property name="menuId" type="string">
+            <column name="menuId" length="50" />
+        </property>
+        <property name="insertTime" type="timestamp">
+            <column name="insertTime" length="23" />
+        </property>
+        <property name="createBy" type="java.lang.Integer">
+            <column name="createBy" />
+        </property>
+        <property name="menuCaption" type="string">
+            <column name="menuCaption" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

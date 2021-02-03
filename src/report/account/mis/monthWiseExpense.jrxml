@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="monthWiseExpense" language="groovy" pageWidth="792" pageHeight="595" orientation="Landscape" columnWidth="757" leftMargin="20" rightMargin="15" topMargin="30" bottomMargin="25" isSummaryWithPageHeaderAndFooter="true">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<parameter name="asOnDate" class="java.util.Date">
+		<defaultValueExpression><![CDATA["2010-07-01"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="comName" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="phoneFax" class="java.lang.String"/>
+	<parameter name="groupName" class="java.lang.String"/>
+	<parameter name="costCentre" class="java.lang.String"/>
+	<parameter name="costId" class="java.lang.String"/>
+	<parameter name="companyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT l.Ledger_Name,cast(cast(DATEPART("YYYY",date) as varchar(5))+'-'+cast(MONTH(date) as varchar(3))+'-01' as Date) as m,
+sum(DrAmount-CrAmount) bal FROM vwVoucher as v
+inner join tbLedger as l ON v.Ledger_Id = l.Ledger_Id
+WHERE l.Create_From like 'E%' AND v.Date <= $P{asOnDate} AND isnull(v.costId,'') like $P{costId}
+ AND v.chqClear = 1 AND v.companyId = $P!{companyId}
+ AND auditapproveflag = 2 and l.companyId = $P!{companyId}
+group by l.Ledger_Name,cast(cast(DATEPART("YYYY",date) as varchar(5))+'-'+cast(MONTH(date) as varchar(3))+'-01' as Date) order by
+cast(cast(DATEPART("YYYY",date) as varchar(5))+'-'+cast(MONTH(date) as varchar(3))+'-01' as Date),l.Ledger_Name]]>
+	</queryString>
+	<field name="Ledger_Name" class="java.lang.String"/>
+	<field name="m" class="java.sql.Date"/>
+	<field name="bal" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="83" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="29" width="806" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{phoneFax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="16" width="806" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="806" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{comName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="42" width="806" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="44" width="806" height="13"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Month Wise Expenses Summary]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="57" width="806" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["As on date:  "+new SimpleDateFormat("dd-MM-yy").format($P{asOnDate})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="70" width="80" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Name of Cost Center:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="81" y="70" width="251" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{costCentre}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" isLazy="true" onErrorType="Blank">
+				<reportElement x="0" y="0" width="45" height="44"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="1" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="806" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="12" splitType="Stretch">
+			<textField pattern="dd-MM-yy">
+				<reportElement x="55" y="0" width="65" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="55" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Print Date :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="122" y="0" width="591" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Developed by: E-Vision Software Limited]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="783" y="0" width="23" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="713" y="0" width="70" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="40" splitType="Stretch">
+			<elementGroup/>
+			<crosstab>
+				<reportElement x="0" y="0" width="807" height="40"/>
+				<crosstabHeaderCell>
+					<cellContents>
+						<staticText>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="134" height="12"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Narrow" size="8"/>
+							</textElement>
+							<text><![CDATA[Ledger Name]]></text>
+						</staticText>
+						<line>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="1" height="12"/>
+							<graphicElement>
+								<pen lineWidth="0.5"/>
+							</graphicElement>
+						</line>
+						<line>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="134" height="1"/>
+							<graphicElement>
+								<pen lineWidth="0.5"/>
+							</graphicElement>
+						</line>
+					</cellContents>
+				</crosstabHeaderCell>
+				<rowGroup name="Ledger_Name" width="134" totalPosition="End">
+					<bucket>
+						<bucketExpression class="java.lang.String"><![CDATA[$F{Ledger_Name}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="2" y="0" width="130" height="12"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$V{Ledger_Name}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="2" y="0" width="130" height="12"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="m" height="12" totalPosition="End">
+					<bucket>
+						<bucketExpression class="java.sql.Date"><![CDATA[$F{m}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField pattern="MMM" isBlankWhenNull="true">
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="12"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<textFieldExpression class="java.util.Date"><![CDATA[$V{m}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="55" height="12"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="balMeasure" class="java.math.BigDecimal" calculation="Sum">
+					<measureExpression><![CDATA[$F{bal}]]></measureExpression>
+				</measure>
+				<crosstabCell width="52" height="13">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="12">
+								<printWhenExpression><![CDATA[$V{balMeasure}!=0]]></printWhenExpression>
+							</reportElement>
+							<textElement textAlignment="Right">
+								<font fontName="Arial Narrow" size="8"/>
+							</textElement>
+							<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{balMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="52" height="12" rowTotalGroup="Ledger_Name">
+					<cellContents mode="Transparent">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="12"/>
+							<textElement textAlignment="Right">
+								<font fontName="Arial Narrow" size="8"/>
+							</textElement>
+							<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{balMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="57" height="13" columnTotalGroup="m">
+					<cellContents mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="55" height="12"/>
+							<textElement textAlignment="Right">
+								<font fontName="Arial Narrow" size="8"/>
+							</textElement>
+							<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{balMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="57" height="12" rowTotalGroup="Ledger_Name" columnTotalGroup="m">
+					<cellContents mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="55" height="12"/>
+							<textElement textAlignment="Right">
+								<font fontName="Arial Narrow" size="8"/>
+							</textElement>
+							<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{balMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vat" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="8"/>
+	<property name="ireport.y" value="160"/>
+	<parameter name="sql" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["select dci.vPartyName,dci.vDestinationTIN,DCD.mProductRate,dci.vPartyAddress,dci.vDestination,dci.vTruckNo,dci.vVatChallanNo as vChallanNo,dci.dChallanDate,DATEADD(HH,1,dci.dChallanDate) dActualDate,DATEADD(Day,1,dci.dChallanDate) dActualDateDay,dcd.vProductName,dcd.mChallanQty,dcd.vProductUnit,(dcd.mChallanQty*DCD.mProductRate) mAmount,((dcd.mChallanQty*DCD.mProductRate)*15)/100 mTotalVat,((dcd.mChallanQty*DCD.mProductRate)+((dcd.mChallanQty*DCD.mProductRate)*15)/100) mTotalAmount,dbo.number(((dcd.mChallanQty*DCD.mProductRate)+((dcd.mChallanQty*DCD.mProductRate)*15)/100)) vInword,'Copy-1' Copy,1 serial from tbDeliveryChallanDetails as DCD inner join tbDeliveryChallanInfo as DCI on DCI.vGatePassNo=DCD.vGatePassNo where dci.vChallanNo = 'CH-01/17-650/115' "
++"union "
++"select dci.vPartyName,dci.vDestinationTIN,DCD.mProductRate,dci.vPartyAddress,dci.vDestination,dci.vTruckNo,dci.vVatChallanNo as vChallanNo,dci.dChallanDate,DATEADD(HH,1,dci.dChallanDate) dActualDate,DATEADD(Day,1,dci.dChallanDate) dActualDateDay, dcd.vProductName,dcd.mChallanQty,dcd.vProductUnit,(dcd.mChallanQty*DCD.mProductRate) mAmount,((dcd.mChallanQty*DCD.mProductRate)*15)/100 mTotalVat,((dcd.mChallanQty*DCD.mProductRate)+((dcd.mChallanQty*DCD.mProductRate)*15)/100) mTotalAmount,dbo.number(((dcd.mChallanQty*DCD.mProductRate)+((dcd.mChallanQty*DCD.mProductRate)*15)/100)) vInword,'Copy-2' Copy,2 serial from tbDeliveryChallanDetails as DCD inner join tbDeliveryChallanInfo as DCI on DCI.vGatePassNo=DCD.vGatePassNo where dci.vChallanNo = 'CH-01/17-650/115' "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sumChallanQty" class="java.math.BigDecimal">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sumVat" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sumAmount" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sumVatPlusAmount" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inWord" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="vPartyName" class="java.lang.String"/>
+	<field name="vDestinationTIN" class="java.lang.String"/>
+	<field name="mProductRate" class="java.math.BigDecimal"/>
+	<field name="vPartyAddress" class="java.lang.String"/>
+	<field name="vDestination" class="java.lang.String"/>
+	<field name="vTruckNo" class="java.lang.String"/>
+	<field name="vChallanNo" class="java.lang.String"/>
+	<field name="dChallanDate" class="java.sql.Timestamp"/>
+	<field name="dActualDate" class="java.sql.Timestamp"/>
+	<field name="dActualDateDay" class="java.sql.Timestamp"/>
+	<field name="vProductName" class="java.lang.String"/>
+	<field name="mChallanQty" class="java.math.BigDecimal"/>
+	<field name="vProductUnit" class="java.lang.String"/>
+	<field name="mAmount" class="java.math.BigDecimal"/>
+	<field name="mTotalVat" class="java.math.BigDecimal"/>
+	<field name="mTotalAmount" class="java.math.BigDecimal"/>
+	<field name="vInword" class="java.lang.String"/>
+	<field name="Copy" class="java.lang.String"/>
+	<field name="serial" class="java.lang.Integer"/>
+	<variable name="sl" class="java.lang.Number" resetType="Group" resetGroup="Copy">
+		<variableExpression><![CDATA[$V{sl}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="Copy" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{Copy}]]></groupExpression>
+		<groupHeader>
+			<band height="232"/>
+		</groupHeader>
+	</group>
+	<background>
+		<band height="500" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="2" width="802" height="498"/>
+				<imageExpression class="java.lang.String"><![CDATA["\\report\\account\\DoSales\\vatchallan.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="125" y="138" width="357" height="13"/>
+				<box leftPadding="2" rightPadding="0">
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vDestinationTIN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="123" width="357" height="13"/>
+				<box leftPadding="2" rightPadding="0">
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vPartyAddress}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="108" width="357" height="13"/>
+				<box leftPadding="2" rightPadding="0">
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vPartyName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="hh.mm aaa">
+				<reportElement x="650" y="138" width="134" height="13"/>
+				<box leftPadding="2" rightPadding="0">
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dChallanDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="650" y="123" width="134" height="13"/>
+				<box leftPadding="2" rightPadding="0">
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dChallanDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement x="650" y="153" width="134" height="13">
+					<printWhenExpression><![CDATA[($F{vPartyName}.equals("SQUARE Toiletries Ltd.")||$F{vPartyName}.equals("Marico Bangladesh Limited"))?false:true]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="2" rightPadding="0">
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dActualDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="650" y="108" width="134" height="13"/>
+				<box leftPadding="2" rightPadding="0">
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vChallanNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="740" y="25" width="44" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Copy}]]></textFieldExpression>
+			</textField>
+			<textField pattern="hh.mm aaa" isBlankWhenNull="true">
+				<reportElement x="650" y="168" width="134" height="13">
+					<printWhenExpression><![CDATA[($F{vPartyName}.equals("SQUARE Toiletries Ltd.")||$F{vPartyName}.equals("Marico Bangladesh Limited"))?false:true]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="2" rightPadding="0">
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dActualDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="153" width="357" height="13"/>
+				<box leftPadding="2" rightPadding="0">
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vDestination}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="168" width="357" height="13"/>
+				<box leftPadding="2" rightPadding="0">
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vTruckNo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="656" y="357" width="62" height="16" forecolor="#333333"/>
+				<box topPadding="0" leftPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{sumVat}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="720" y="357" width="61" height="16" forecolor="#333333"/>
+				<box topPadding="0" leftPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{sumVatPlusAmount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="587" y="357" width="69" height="16" forecolor="#333333"/>
+				<box topPadding="0" leftPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{sumAmount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="395" y="357" width="62" height="16" forecolor="#333333"/>
+				<box topPadding="0" leftPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{sumChallanQty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="89" y="374" width="693" height="16" forecolor="#333333"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{inWord}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement x="651" y="154" width="134" height="13">
+					<printWhenExpression><![CDATA[($F{vPartyName}.equals("SQUARE Toiletries Ltd.")||$F{vPartyName}.equals("Marico Bangladesh Limited"))?true:false]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="2" rightPadding="0">
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dActualDateDay}]]></textFieldExpression>
+			</textField>
+		</band>
+	</background>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement x="718" y="0" width="63" height="30">
+					<printWhenExpression><![CDATA[$F{vPartyName}.equals("HIFS Agro Food Industries Ltd.")?$F{mAmount}:true]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{mTotalAmount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="441" y="0" width="19" height="30"/>
+				<box topPadding="2"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vProductUnit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="655" y="0" width="63" height="30">
+					<printWhenExpression><![CDATA[$F{vPartyName}.equals("HIFS Agro Food Industries Ltd.")?"0.00":true]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{mTotalVat}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="586" y="0" width="69" height="30"/>
+				<box topPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{mAmount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="390" y="0" width="49" height="30"/>
+				<box topPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{mChallanQty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="68" y="0" width="322" height="30"/>
+				<box topPadding="2"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vProductName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="21" y="0" width="40" height="30"/>
+				<box topPadding="2"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{sl}+"."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

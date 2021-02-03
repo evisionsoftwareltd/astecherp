@@ -1,0 +1,1052 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptCatWiseMonthlyTarget&amp;Achieve" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="788" leftMargin="36" rightMargin="18" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="141"/>
+	<parameter name="company" class="java.lang.String">
+		<defaultValueExpression><![CDATA[" RATANPUR SHIP RE-CYCLING INDUSTRIES LIMITED"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="address" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Ship Yard: SonaiChori, Shitalpur, Sgitakunda; Head Office: Nahar mansion, Muradpur, Chittagong."]]></defaultValueExpression>
+	</parameter>
+	<parameter name="phone" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Phone: +88031-2502334-5 Fax: +88031-2502336 Email: ratanpur_sril@yahoo.com"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UserName" class="java.lang.String"/>
+	<parameter name="UserIp" class="java.lang.String"/>
+	<parameter name="sql" class="java.lang.String">
+		<defaultValueExpression><![CDATA["select at.vDivisionId,at.vAreaId,at.vDivisionName,at.vAreaName,fi.vCategoryId,fi.vCategoryName,fi.vSubCategoryId,fi.vSubCategoryName,at.vAreaIncharge,ei.dJoiningDate, ei.vContact, (at.vFlQty+vPnlQty+at.vFrmQty+at.vClQty+at.vFClQty)vTargetQty,(at.vFlAmount+at.vPnlAmount+at.vFrmAmount+at.vClAmount+at.vFClAmount)  vTargetAmount,sum(sd.mAmount) achieveAmount,sum(sd.mChallanQty) achieveQty,((sum(sd.mAmount)*100)/(at.vFlAmount+at.vPnlAmount+at.vFrmAmount+at.vClAmount+at.vFClAmount)) achieveAmountPercentage,((sum(sd.mChallanQty)*100)/ (at.vFlQty+at.vPnlQty+at.vFrmQty+at.vClQty+at.vFClQty)) achieveQtyPercentage,( (at.vFlAmount+at.vPnlAmount+at.vFrmAmount+at.vClAmount+at.vFClAmount)- sum(sd.mAmount)) rAmountTarget,((at.vFlQty+at.vPnlQty+at.vFrmQty+at.vClQty+at.vFClQty)-sum(sd.mChallanQty)) rQtyTarget, (100-((sum(sd.mAmount)*100)/ (at.vFlAmount+at.vPnlAmount+at.vFrmAmount+at.vClAmount+at.vFClAmount))) rTargetAmountPercentage, (100-((sum(sd.mChallanQty)*100)/(at.vFlQty+at.vPnlQty+at.vFrmQty+at.vClQty+at.vFClQty))) rTargetQtyPercentage, (select DATEDIff(dd ,((CONVERT(varchar(50),year('2015-07-05')))+'-'+((CONVERT(varchar(50),month('2015-07-05'))))+'-01'), ((CONVERT(date,DateAdd(dd, -1, DateAdd(mm, 1,(convert(varchar(50),Month(convert(varchar(50),'July') +' 1 ' + convert(varchar(50),year('2015-07-05'))))+'/01/'+convert(varchar(50),year('2015-07-05')))))))))-  DATEDIff(dd , ((CONVERT(varchar(50),year('2015-07-05')))+'-'+((CONVERT(varchar(50),month('2015-07-05'))))+'-01'),'2015-07-05')) DaysLeft, at.vAreaIncharge from tbAreaTarget at inner join tbPartyInfo pin on pin.AreaId=at.vAreaId inner join   tbSalesInvoiceInfo si on pin.PartyCode=si.vPartyId  inner join tbSalesInvoiceDetails sd on  si.vBillNo=sd.vBillNo inner join tbAreaInfo ai on at.vAreaId=ai.vAreaId  inner join tbEmployeeInfo ei on ei.vEmployeeId=ai.vEmployeeId inner join tbFinishedProductInfo fi on fi.vProductId=sd.vProductId where fi.vCategoryId='G171' and  MONTH(at.dMonth)=MONTH('2015-07-05') and year(at.dMonth)=year('2015-07-05')  group by at.vDivisionName,at.vAreaName,at.vAreaIncharge,ei.dJoiningDate, ei.vContact,at.vDivisionId,at.vAreaId,at.vFlAmount,at.vPnlAmount,at.vFrmAmount,at.vClAmount,at.vFClAmount,at.vFlQty,at.vPnlQty,at.vFrmQty,at.vClQty,at.vFClQty,fi.vCategoryId,fi.vCategoryName,fi.vSubCategoryId,fi.vSubCategoryName"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SysDate" class="java.util.Date"/>
+	<parameter name="month" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="vDivisionId" class="java.lang.String"/>
+	<field name="vAreaId" class="java.lang.String"/>
+	<field name="vDivisionName" class="java.lang.String"/>
+	<field name="vAreaName" class="java.lang.String"/>
+	<field name="vCategoryId" class="java.lang.String"/>
+	<field name="vCategoryName" class="java.lang.String"/>
+	<field name="vSubCategoryId" class="java.lang.String"/>
+	<field name="vSubCategoryName" class="java.lang.String"/>
+	<field name="vAreaIncharge" class="java.lang.String"/>
+	<field name="dJoiningDate" class="java.sql.Date"/>
+	<field name="vContact" class="java.lang.String"/>
+	<field name="vTargetQty" class="java.math.BigDecimal"/>
+	<field name="vTargetAmount" class="java.math.BigDecimal"/>
+	<field name="achieveAmount" class="java.math.BigDecimal"/>
+	<field name="achieveQty" class="java.math.BigDecimal"/>
+	<field name="achieveAmountPercentage" class="java.math.BigDecimal"/>
+	<field name="achieveQtyPercentage" class="java.math.BigDecimal"/>
+	<field name="rAmountTarget" class="java.math.BigDecimal"/>
+	<field name="rQtyTarget" class="java.math.BigDecimal"/>
+	<field name="rTargetAmountPercentage" class="java.math.BigDecimal"/>
+	<field name="rTargetQtyPercentage" class="java.math.BigDecimal"/>
+	<field name="DaysLeft" class="java.lang.Integer"/>
+	<variable name="sl" class="java.lang.Number" resetType="Group" resetGroup="Div">
+		<variableExpression><![CDATA[$V{sl}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="TMAmount" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{vTargetAmount}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="TAchieveAmount" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{achieveAmount}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="TRAmount" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{rAmountTarget}]]></variableExpression>
+	</variable>
+	<variable name="SMAmount" class="java.math.BigDecimal" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{vTargetAmount}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="SAchieveAmount" class="java.math.BigDecimal" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{achieveAmount}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="SRAmount" class="java.math.BigDecimal" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{rAmountTarget}]]></variableExpression>
+	</variable>
+	<variable name="TMQty" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{vTargetQty}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="TAchieveQty" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{achieveQty}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="TRQty" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{rQtyTarget}]]></variableExpression>
+	</variable>
+	<variable name="SAchieveQty" class="java.math.BigDecimal" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{achieveQty}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="SRQty" class="java.math.BigDecimal" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{rQtyTarget}]]></variableExpression>
+	</variable>
+	<variable name="SMQty" class="java.math.BigDecimal" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{vTargetQty}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="SRQtyPer" class="java.math.BigDecimal" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{rTargetQtyPercentage}]]></variableExpression>
+	</variable>
+	<variable name="TRQtyPer" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{rTargetQtyPercentage}]]></variableExpression>
+	</variable>
+	<variable name="TRAmountPer" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{rTargetAmountPercentage}]]></variableExpression>
+	</variable>
+	<variable name="SRAmountPer" class="java.math.BigDecimal" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{rTargetAmountPercentage}]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.lang.String"/>
+	<variable name="SAchieveQtyPer" class="java.math.BigDecimal" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{achieveQtyPercentage}]]></variableExpression>
+	</variable>
+	<variable name="TAchieveQtyPer" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{achieveQtyPercentage}]]></variableExpression>
+	</variable>
+	<variable name="TAchieveAmountPer" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{achieveAmountPercentage}]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="SAchieveAmountPer" class="java.math.BigDecimal" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{achieveAmountPercentage}]]></variableExpression>
+	</variable>
+	<group name="Div">
+		<groupExpression><![CDATA[$F{vDivisionId}]]></groupExpression>
+		<groupHeader>
+			<band height="11">
+				<rectangle>
+					<reportElement x="0" y="0" width="789" height="10" backcolor="#999999"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<line>
+					<reportElement x="-1" y="-1" width="1" height="12"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="-1" width="789" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="2" y="0" width="33" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Tahoma" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Division]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="37" y="0" width="2" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Tahoma" size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="41" y="0" width="465" height="10" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vDivisionName}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="788" y="0" width="1" height="11"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="14">
+				<textField pattern="#,##0">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="434" y="1" width="40" height="11" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SAchieveQty}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="511" y="1" width="63" height="11" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SAchieveAmount}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="676" y="1" width="63" height="11" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SRAmount}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="13" width="789" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="788" y="0" width="1" height="14"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="-1" y="0" width="1" height="14"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="227" y="2" width="25" height="10"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Tahoma" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="252" y="2" width="5" height="10"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Tahoma" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="639" y="1" width="13" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Tahoma" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Pcs]]></text>
+				</staticText>
+				<textField pattern="#,##0">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="598" y="1" width="40" height="11" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SRQty}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="475" y="1" width="13" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Tahoma" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Pcs]]></text>
+				</staticText>
+				<textField pattern="#,##0">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="374" y="1" width="55" height="11" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SMAmount}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="318" y="1" width="40" height="11" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SMQty}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="359" y="1" width="13" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Tahoma" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Pcs]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Category">
+		<groupExpression><![CDATA[$F{vAreaIncharge}]]></groupExpression>
+		<groupHeader>
+			<band height="11">
+				<rectangle>
+					<reportElement x="0" y="0" width="788" height="10" backcolor="#CCCCCC"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement x="71" y="0" width="2" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Tahoma" size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="-1" width="789" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="-1" y="-1" width="1" height="12"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="788" y="-1" width="1" height="12"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="75" y="0" width="708" height="10" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vCategoryName}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="36" y="0" width="33" height="11"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Tahoma" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Category]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="66" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="257" y="38" width="277" height="14" forecolor="#000000" backcolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="37" width="792" height="16" forecolor="#333333"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CATEGORY WISE MONTHLY TARGET & ACHIEVEMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="724" y="55" width="31" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Month :]]></text>
+			</staticText>
+			<textField pattern="MMMM,yyyy">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="756" y="55" width="34" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{month}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="792" height="15" forecolor="#333333"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{company}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="14" width="792" height="10" forecolor="#333333"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="25" width="792" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{phone}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="101" height="37"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="32" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SL#]]></text>
+			</staticText>
+			<line>
+				<reportElement x="32" y="0" width="1" height="20" forecolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="372" y="11" width="1" height="8"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="433" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="-1" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="598" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="762" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="788" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="373" y="10" width="60" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="1" width="164" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Achievement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="599" y="1" width="163" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remaining]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="763" y="1" width="20" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Days Left]]></text>
+			</staticText>
+			<line>
+				<reportElement x="489" y="11" width="1" height="9"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="320" y="10" width="443" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="490" y="11" width="20" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ (%)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="11" width="55" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="742" y="11" width="20" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ (%)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="599" y="11" width="55" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="789" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="33" y="1" width="103" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Zone]]></text>
+			</staticText>
+			<line>
+				<reportElement x="320" y="0" width="1" height="19" forecolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="576" y="10" width="1" height="9"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="511" y="11" width="65" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="577" y="11" width="22" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ (%)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="510" y="11" width="1" height="9"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="676" y="11" width="65" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="655" y="11" width="20" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ (%)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="654" y="11" width="1" height="9"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="675" y="11" width="1" height="9"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="741" y="11" width="1" height="9"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="321" y="10" width="51" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="1" width="93" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TSO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="231" y="1" width="47" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mobile
+ No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="0" width="41" height="19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Joining
+Date]]></text>
+			</staticText>
+			<line>
+				<reportElement x="278" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="230" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="136" y="0" width="1" height="19"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="321" y="1" width="112" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monthly Target ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="489" y="0" width="1" height="10"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="32" y="0" width="1" height="10"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="433" y="0" width="1" height="10"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="374" y="0" width="55" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{vTargetAmount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="763" y="0" width="20" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{DaysLeft}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0">
+				<reportElement x="0" y="0" width="32" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{sl}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="434" y="0" width="40" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{achieveQty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="676" y="0" width="63" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{rAmountTarget}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="373" y="0" width="1" height="10"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="35" y="0" width="101" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vAreaName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="317" y="0" width="1" height="10"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="-1" width="789" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="10" width="789" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="788" y="0" width="1" height="11"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="-1" y="0" width="1" height="11"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="318" y="0" width="40" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{vTargetQty}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="475" y="0" width="13" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Pcs]]></text>
+			</staticText>
+			<line>
+				<reportElement x="510" y="0" width="1" height="10"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="597" y="0" width="1" height="10"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="576" y="0" width="1" height="10"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="490" y="0" width="18" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{achieveQtyPercentage}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="511" y="0" width="63" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{achieveAmount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00-)">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="577" y="0" width="18" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{achieveAmountPercentage}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="762" y="0" width="1" height="10"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="639" y="0" width="13" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Pcs]]></text>
+			</staticText>
+			<line>
+				<reportElement x="741" y="0" width="1" height="10"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="675" y="0" width="1" height="10"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="654" y="0" width="1" height="10"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="598" y="0" width="40" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{rQtyTarget}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="655" y="0" width="18" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{rTargetQtyPercentage}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="742" y="0" width="18" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{rTargetAmountPercentage}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="278" y="0" width="1" height="10"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="230" y="0" width="1" height="10"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="136" y="0" width="1" height="10"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="140" y="0" width="90" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vAreaIncharge}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="233" y="0" width="45" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vContact}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="279" y="0" width="38" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dJoiningDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="359" y="0" width="13" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Pcs]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="12" splitType="Stretch">
+			<textField>
+				<reportElement x="704" y="2" width="49" height="10" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd-MM-yyyy  hh.mm.ss aaa">
+				<reportElement x="4" y="2" width="97" height="10" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{SysDate}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="754" y="2" width="32" height="10" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="2" width="78" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{UserName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="237" y="2" width="258" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6"/>
+				</textElement>
+				<text><![CDATA[Software Solution by : E-Vision Software Ltd. || helpline : 01755-506044 || www.eslctg.com]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="17" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="511" y="3" width="63" height="11" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<bottomPen lineWidth="2.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{TAchieveAmount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="598" y="3" width="40" height="11" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<bottomPen lineWidth="2.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{TRQty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="676" y="3" width="63" height="11" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<bottomPen lineWidth="2.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{TRAmount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="177" y="2" width="74" height="11"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grand Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="251" y="2" width="5" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="639" y="3" width="13" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Pcs]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="434" y="3" width="40" height="11" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<bottomPen lineWidth="2.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{TAchieveQty}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="475" y="3" width="13" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Pcs]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="374" y="3" width="55" height="11" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<bottomPen lineWidth="2.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{TMAmount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="318" y="3" width="40" height="11" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<bottomPen lineWidth="2.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{TMQty}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="359" y="3" width="13" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Pcs]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

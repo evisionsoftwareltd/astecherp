@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="check_final" language="groovy" pageWidth="700" pageHeight="300" columnWidth="660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="date" class="java.lang.String"/>
+	<parameter name="amount" class="java.lang.String"/>
+	<parameter name="amount_word" class="java.lang.String"/>
+	<parameter name="ledgerName" class="java.lang.String"/>
+	<parameter name="spaceDate" class="java.lang.String"/>
+	<parameter name="userName" class="java.lang.String"/>
+	<parameter name="userIp" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from tbLogin]]>
+	</queryString>
+	<field name="userId" class="java.lang.Integer"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="pass" class="java.lang.String"/>
+	<field name="createTime" class="java.sql.Timestamp"/>
+	<field name="createBy" class="java.lang.Integer"/>
+	<field name="isAdmin" class="java.lang.Integer"/>
+	<field name="isInsertable" class="java.lang.Integer"/>
+	<field name="isUpdateable" class="java.lang.Integer"/>
+	<field name="isDeleteable" class="java.lang.Integer"/>
+	<field name="isActive" class="java.lang.Integer"/>
+	<field name="isSuperAdmin" class="java.lang.Integer"/>
+	<title>
+		<band height="75" splitType="Stretch">
+			<textField pattern="">
+				<reportElement x="2" y="55" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="517" y="55" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{spaceDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="111" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="91" width="100" height="20"/>
+				<textElement>
+					<font fontName="Tahoma" size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="517" y="75" width="100" height="20"/>
+				<textElement>
+					<font fontName="Tahoma" size="12" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="152" y="37" width="452" height="17"/>
+				<textElement>
+					<font fontName="Tahoma" size="10" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{amount_word}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="-1" width="100" height="92"/>
+				<textElement>
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ledgerName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="119" y="23" width="353" height="14"/>
+				<textElement>
+					<font fontName="Tahoma" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ledgerName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+</jasperReport>

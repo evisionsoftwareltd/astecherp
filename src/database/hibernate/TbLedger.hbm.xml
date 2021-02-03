@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 11, 2011 10:26:55 AM by Hibernate Tools 3.3.0.GA -->
+<hibernate-mapping>
+    <class name="database.hibernate.TbLedger" table="tbLedger" schema="dbo">
+        <id name="ledgerId" type="string">
+            <column name="Ledger_Id" length="50" />
+            <generator class="assigned" />
+        </id>
+        <property name="ledgerName" type="string">
+            <column name="Ledger_Name" length="250" />
+        </property>
+        <property name="creationYear" type="java.lang.Integer">
+            <column name="Creation_Year" />
+        </property>
+        <property name="parentId" type="string">
+            <column name="Parent_Id" length="50" />
+        </property>
+        <property name="createFrom" type="string">
+            <column name="Create_From" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

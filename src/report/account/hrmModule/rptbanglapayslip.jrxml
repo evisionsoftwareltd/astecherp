@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptauditbanglapayslip" language="groovy" columnCount="2" pageWidth="612" pageHeight="1008" columnWidth="286" leftMargin="20" rightMargin="20" topMargin="11" bottomMargin="14">
+	<property name="ireport.zoom" value="3.897434200000003"/>
+	<property name="ireport.x" value="286"/>
+	<property name="ireport.y" value="194"/>
+	<parameter name="company" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="email" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="phone" class="java.lang.String"/>
+	<parameter name="fax" class="java.lang.String"/>
+	<parameter name="sql" class="java.lang.String">
+		<defaultValueExpression><![CDATA["select S.year,s.vMonthName,s.empId,s.empCode,s.empName,s.shiftId,s.shiftName,s.empType,s.designation," +
+					"s.vDepartmentID,s.vDepartmentName,s.SectionID,s.Section,s.joinDate,s.totalDaysofMonth,s.totalWorkingDay,s.Friday,s.present," +
+					"s.absentDay,s.leaveDay,s.holiday,s.casualLeave,s.sickLeave,s.EarnedLeave,s.OfficialTour," +
+					"s.Gross,s.basicSalary,s.houseRent,s.Conveyance,s.Medical,s.perDay,s.AttBonus,s.FridayAllowance," +
+					"s.Subtotal,s.salaryCutAbsent,s.advanceSalary,s.incomeTax,s.Insurance,s.ProvidentFund," +
+					"s.totalDeduction,s.Adjust,s.Less,s.payableAmount,s.iTotalOTHour,s.iTotalOTMin,s.otRate," +
+					"s.totalOtTaka,CONVERT(date,ei.dConfirmationDate) dConfirmationDate,ei.dConfirmationDate as conDate," +
+					"(ISNULL(Lb.iClyBalance,0)+ISNULL(Lb.iClOpening,0)) as totalCL,ISNULL(Lb.iClEnjoyed,0) iClEnjoyed," +
+					"(ISNULL(Lb.iSlyBalance,0)+ISNULL(Lb.iSlOpening,0)) as totalSL,ISNULL(Lb.iSlEnjoyed,0) iSlEnjoyed," +
+					"(ISNULL(Lb.iAlyBalance,0)+ISNULL(Lb.iAlOpening,0)) as totalAL,ISNULL(Lb.iAlEnjoyed,0) iAlEnjoyed," +
+					"(ISNULL(Lb.iMlyBalance,0)+ISNULL(Lb.iMlOpening,0)) as totalML,ISNULL(Lb.iMlEnjoyed,0) iMlEnjoyed," +
+					"ISNULL(lri.mLoanBalance,0) mLoanBalance,ISNULL(lri.mRecoveryAmount,0) mRecoveryAmount,fridayAmount  from tbSalary S inner join tbEmployeeInfo ei on s.autoEmployeeID=ei.vEmployeeId "+
+"left join tbLeaveBalanceNew Lb on Lb.vAutoEmployeeId=ei.vEmployeeId and "+
+"lb.iflag=0left join  tbLoanRecoveryInfo lri on lri.vAutoEmployeeId=ei.vEmployeeId and "+
+"DATENAME(MM,lri.dRecoveryDate)=s.vMonthName and year(lri.dRecoveryDate)=s.year where year='2016' "+
+"and s.autoEmployeeId like 'EMP-100' and vMonthName='April' and s.vDepartmentID='DEPT2' and "+
+"s.SectionId='SEC-21' order by s.Section,s.empID"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="username" class="java.lang.String"/>
+	<parameter name="userIp" class="java.lang.String"/>
+	<parameter name="SysDate" class="java.util.Date"/>
+	<parameter name="month" class="java.lang.String"/>
+	<parameter name="year" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="year" class="java.lang.Integer"/>
+	<field name="vMonthName" class="java.lang.String"/>
+	<field name="empId" class="java.lang.String"/>
+	<field name="empCode" class="java.lang.String"/>
+	<field name="empName" class="java.lang.String"/>
+	<field name="shiftId" class="java.lang.String"/>
+	<field name="shiftName" class="java.lang.String"/>
+	<field name="empType" class="java.lang.String"/>
+	<field name="designation" class="java.lang.String"/>
+	<field name="vDepartmentID" class="java.lang.String"/>
+	<field name="vDepartmentName" class="java.lang.String"/>
+	<field name="SectionID" class="java.lang.String"/>
+	<field name="Section" class="java.lang.String"/>
+	<field name="joinDate" class="java.sql.Date"/>
+	<field name="totalDaysofMonth" class="java.lang.Integer"/>
+	<field name="totalWorkingDay" class="java.lang.Integer"/>
+	<field name="Friday" class="java.lang.Integer"/>
+	<field name="present" class="java.lang.Integer"/>
+	<field name="absentDay" class="java.lang.Integer"/>
+	<field name="leaveDay" class="java.lang.Integer"/>
+	<field name="holiday" class="java.lang.Integer"/>
+	<field name="casualLeave" class="java.lang.Integer"/>
+	<field name="sickLeave" class="java.lang.Integer"/>
+	<field name="EarnedLeave" class="java.lang.Integer"/>
+	<field name="OfficialTour" class="java.lang.Integer"/>
+	<field name="Gross" class="java.math.BigDecimal"/>
+	<field name="basicSalary" class="java.math.BigDecimal"/>
+	<field name="houseRent" class="java.math.BigDecimal"/>
+	<field name="Conveyance" class="java.math.BigDecimal"/>
+	<field name="Medical" class="java.math.BigDecimal"/>
+	<field name="perDay" class="java.math.BigDecimal"/>
+	<field name="AttBonus" class="java.math.BigDecimal"/>
+	<field name="FridayAllowance" class="java.lang.Integer"/>
+	<field name="Subtotal" class="java.math.BigDecimal"/>
+	<field name="salaryCutAbsent" class="java.math.BigDecimal"/>
+	<field name="advanceSalary" class="java.math.BigDecimal"/>
+	<field name="incomeTax" class="java.math.BigDecimal"/>
+	<field name="Insurance" class="java.math.BigDecimal"/>
+	<field name="ProvidentFund" class="java.math.BigDecimal"/>
+	<field name="totalDeduction" class="java.math.BigDecimal"/>
+	<field name="Adjust" class="java.math.BigDecimal"/>
+	<field name="Less" class="java.math.BigDecimal"/>
+	<field name="payableAmount" class="java.math.BigDecimal"/>
+	<field name="iTotalOTHour" class="java.lang.Integer"/>
+	<field name="iTotalOTMin" class="java.lang.Integer"/>
+	<field name="otRate" class="java.math.BigDecimal"/>
+	<field name="totalOtTaka" class="java.math.BigDecimal"/>
+	<field name="dConfirmationDate" class="java.sql.Date"/>
+	<field name="conDate" class="java.lang.String"/>
+	<field name="totalCL" class="java.lang.Integer"/>
+	<field name="iClEnjoyed" class="java.lang.Integer"/>
+	<field name="totalSL" class="java.lang.Integer"/>
+	<field name="iSlEnjoyed" class="java.lang.Integer"/>
+	<field name="totalAL" class="java.lang.Integer"/>
+	<field name="iAlEnjoyed" class="java.lang.Integer"/>
+	<field name="totalML" class="java.lang.Integer"/>
+	<field name="iMlEnjoyed" class="java.lang.Integer"/>
+	<field name="mLoanBalance" class="java.math.BigDecimal"/>
+	<field name="mRecoveryAmount" class="java.math.BigDecimal"/>
+	<field name="fridayAmount" class="java.math.BigDecimal"/>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="239" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="31" width="275" height="159"/>
+				<imageExpression class="java.lang.String"><![CDATA["report\\account\\hrmModule\\Pay Slip.JPG"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="285" y="-18" width="1" height="257"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="1" y="16" width="277" height="7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="4"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{phone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="2" width="277" height="7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{company}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="9" width="277" height="7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="-18" width="1" height="257"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="248" y="230" width="22" height="8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="4"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="270" y="230" width="15" height="8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="4"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd-MM-yyyy hh:mm:ss aaa">
+				<reportElement x="1" y="230" width="53" height="8"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="4"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{SysDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="99" y="230" width="148" height="8" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="4"/>
+				</textElement>
+				<text><![CDATA[Developed by: E-Vision Software Ltd. ||  Mob:01755-506044 || www.eslctg.com]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="54" y="230" width="45" height="8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="4"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{username}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape">
+				<reportElement x="1" y="2" width="41" height="21"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="30" y="216" width="253" height="13"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="4" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ [Permanent]  = {(Basic + Conveyance) / Total Working Day}             [Probisionary] = Gross / Total Working Day
+ [Casual]=(Gross/Total Working Day)                                                     Friday Allowance ={(basicSalary / 26) + fridayLunchFee}]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="201" width="253" height="7"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="4" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[1. Total OT Amount = (Total OT Hour x OT Rate)+{(OT Rate/60) x Total OT Minute}]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="193" width="43" height="8"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[OT Calculation :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="208" width="69" height="8"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Per Day Salary Calculation :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="193" width="19" height="8"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Note :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="69" y="23" width="153" height="7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Payslip for the month of "+$P{month}+"-"+$P{year}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-20" y="238" width="306" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0">
+				<reportElement x="95" y="140" width="33" height="7"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{advanceSalary}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="215" y="183" width="24" height="7">
+					<printWhenExpression><![CDATA[$F{mRecoveryAmount}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{mRecoveryAmount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="46" width="51" height="7"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Section}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yy" isBlankWhenNull="true">
+				<reportElement x="44" y="45" width="61" height="7"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{joinDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="44" y="37" width="61" height="7"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{designation}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="252" y="183" width="21" height="7">
+					<printWhenExpression><![CDATA[$F{mLoanBalance}.equals(null)?false:true && $F{mRecoveryAmount}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{mLoanBalance}-$F{mRecoveryAmount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="63" y="95" width="65" height="8"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{otRate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;(-#,##0)" isBlankWhenNull="true">
+				<reportElement x="63" y="65" width="65" height="7"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Gross}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="178" y="130" width="22" height="7">
+					<printWhenExpression><![CDATA[$F{totalCL}.equals(0)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{totalCL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="95" y="183" width="33" height="7"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Gross}+$F{fridayAmount}-($F{perDay}*$F{absentDay})+
+($F{iTotalOTHour}*$F{otRate}+($F{otRate}/60*$F{iTotalOTMin}))+
+$F{AttBonus}-($F{advanceSalary}+$F{incomeTax}+$F{Insurance})+
+($F{Adjust}-$F{Less})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="219" y="64" width="53" height="7"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{totalWorkingDay}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="229" y="31" width="51" height="7"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{empType}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="178" y="138" width="22" height="7">
+					<printWhenExpression><![CDATA[$F{totalAL}.equals(0)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{totalAL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="252" y="146" width="21" height="7">
+					<printWhenExpression><![CDATA[($F{totalSL}-$F{iSlEnjoyed}).equals(0)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{totalSL}-$F{iSlEnjoyed}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="219" y="79" width="53" height="8"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{holiday}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="63" y="116" width="65" height="7"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{AttBonus}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="217" y="130" width="22" height="7">
+					<printWhenExpression><![CDATA[$F{iClEnjoyed}.equals(0)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iClEnjoyed}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="32" width="51" height="7"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{empId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="39" width="51" height="7"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vDepartmentName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yy" isBlankWhenNull="true">
+				<reportElement x="229" y="39" width="51" height="7"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dConfirmationDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="178" y="183" width="22" height="7">
+					<printWhenExpression><![CDATA[$F{mLoanBalance}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{mLoanBalance}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="217" y="138" width="22" height="7">
+					<printWhenExpression><![CDATA[$F{iAlEnjoyed}.equals(0)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iAlEnjoyed}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="219" y="72" width="53" height="7"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{present}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="63" y="80" width="65" height="8"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Gross}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="252" y="130" width="21" height="7">
+					<printWhenExpression><![CDATA[($F{totalCL}-$F{iClEnjoyed}).equals(0)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{totalCL}-$F{iClEnjoyed}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="63" y="73" width="65" height="7"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{perDay}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="178" y="146" width="22" height="7">
+					<printWhenExpression><![CDATA[$F{totalSL}]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{totalSL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="95" y="154" width="33" height="7"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{incomeTax}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="97" y="168" width="33" height="7"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{advanceSalary}+$F{incomeTax}+$F{Insurance}+($F{perDay}*$F{absentDay})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="217" y="146" width="22" height="7">
+					<printWhenExpression><![CDATA[$F{iSlEnjoyed}.equals(0)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iSlEnjoyed}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="219" y="101" width="53" height="9"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{absentDay}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="219" y="94" width="53" height="7"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{leaveDay}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="95" y="147" width="33" height="7"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Insurance}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="63" y="125" width="65" height="7"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Gross}-($F{perDay}*$F{absentDay})+($F{iTotalOTHour}*$F{otRate}+($F{otRate}/60*$F{iTotalOTMin}))+$F{AttBonus}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="252" y="138" width="21" height="7">
+					<printWhenExpression><![CDATA[($F{totalAL}-$F{iAlEnjoyed}).equals(0)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{totalAL}-$F{iAlEnjoyed}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="107" width="65" height="7"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iTotalOTHour}*$F{otRate}+($F{otRate}/60*$F{iTotalOTMin})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="44" y="30" width="61" height="7"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{empName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="95" y="176" width="33" height="7"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Adjust}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="219" y="87" width="53" height="7"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Friday}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="88" width="28" height="7">
+					<printWhenExpression><![CDATA[$F{iTotalOTMin}.toString().length()>1]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{iTotalOTMin}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="88" width="28" height="7">
+					<printWhenExpression><![CDATA[$F{iTotalOTMin}.toString().length()<=1]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["0"+$F{iTotalOTMin}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="63" y="88" width="34" height="7">
+					<printWhenExpression><![CDATA[$F{iTotalOTHour}.toString().length()<=1]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["0"+$F{iTotalOTHour}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="97" y="88" width="3" height="7"/>
+				<box leftPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="63" y="88" width="34" height="7">
+					<printWhenExpression><![CDATA[$F{iTotalOTHour}.toString().length()>1]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{iTotalOTHour}.toString()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="189" width="272" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0">
+				<reportElement x="95" y="161" width="33" height="7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{perDay}*$F{absentDay}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

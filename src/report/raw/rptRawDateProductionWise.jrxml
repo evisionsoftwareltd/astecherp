@@ -1,0 +1,916 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report3" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="company" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="sql" class="java.lang.String">
+		<defaultValueExpression><![CDATA["select * from dbo.[funRawMaxMinStock]('2013-07-01', '2013-08-19 23:59:59','RPI8') "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="openFiscal" class="java.lang.String"/>
+	<parameter name="endFiscal" class="java.lang.String"/>
+	<parameter name="isZero" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="Particular" class="java.lang.String"/>
+	<field name="dDate" class="java.sql.Timestamp"/>
+	<field name="CategoryName" class="java.lang.String"/>
+	<field name="CategoryId" class="java.lang.String"/>
+	<field name="ItemName" class="java.lang.String"/>
+	<field name="ItemCode" class="java.lang.String"/>
+	<field name="OpeningQty" class="java.lang.Double"/>
+	<field name="OpeningRate" class="java.math.BigDecimal"/>
+	<field name="OpeningAmt" class="java.math.BigDecimal"/>
+	<field name="ReceivedQty" class="java.lang.Double"/>
+	<field name="ReceivedRate" class="java.math.BigDecimal"/>
+	<field name="ReceivedAmt" class="java.math.BigDecimal"/>
+	<field name="DeliveryQty" class="java.lang.Double"/>
+	<field name="DeliveryRate" class="java.math.BigDecimal"/>
+	<field name="DeliveryAmt" class="java.math.BigDecimal"/>
+	<field name="WastageQty" class="java.lang.Double"/>
+	<field name="WastageRate" class="java.math.BigDecimal"/>
+	<field name="WastageAmt" class="java.math.BigDecimal"/>
+	<field name="ClosingQty" class="java.lang.Double"/>
+	<field name="ClosingRate" class="java.math.BigDecimal"/>
+	<field name="ClosingAmt" class="java.math.BigDecimal"/>
+	<field name="Flag" class="java.lang.String"/>
+	<field name="PUnit" class="java.lang.String"/>
+	<variable name="OpenSum" class="java.lang.Double" resetType="Group" resetGroup="Product" calculation="Sum">
+		<variableExpression><![CDATA[$F{OpeningAmt}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="receiveAmt" class="java.lang.Double" resetType="Group" resetGroup="Product" calculation="Sum">
+		<variableExpression><![CDATA[$F{ReceivedAmt}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="IssueAmt" class="java.lang.Double" resetType="Group" resetGroup="Product" calculation="Sum">
+		<variableExpression><![CDATA[$F{DeliveryAmt}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="wastageAmt" class="java.lang.Double" resetType="Group" resetGroup="Product" calculation="Sum">
+		<variableExpression><![CDATA[$F{WastageAmt}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="closeingAmt" class="java.lang.Double" resetType="Group" resetGroup="Product" calculation="Sum">
+		<variableExpression><![CDATA[$F{ClosingAmt}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="Product" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{ItemCode}]]></groupExpression>
+		<groupHeader>
+			<band height="59">
+				<staticText>
+					<reportElement x="12" y="7" width="42" height="15" forecolor="#333333" backcolor="#666666"/>
+					<textElement/>
+					<text><![CDATA[Product:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="57" y="7" width="273" height="15" forecolor="#333333" backcolor="#666666"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ItemName}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="10" y="58" width="785" height="1" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="9" y="21" width="790" height="1" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="8" y="21" width="1" height="38" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="141" y="21" width="1" height="38" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="65" y="21" width="1" height="38" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="553" y="22" width="1" height="36" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="290" y="21" width="1" height="38" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="675" y="20" width="1" height="38" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="425" y="21" width="1" height="38" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="21" y="23" width="27" height="18" forecolor="#333333" backcolor="#666666"/>
+					<textElement/>
+					<text><![CDATA[Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="68" y="23" width="56" height="18" forecolor="#333333" backcolor="#666666"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Particular]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="151" y="23" width="109" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Opening Balance]]></text>
+				</staticText>
+				<line>
+					<reportElement x="143" y="38" width="652" height="1" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="173" y="39" width="1" height="19" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="206" y="39" width="1" height="19" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="146" y="39" width="23" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Unit]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="176" y="40" width="23" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Qty]]></text>
+				</staticText>
+				<line>
+					<reportElement x="243" y="39" width="1" height="19" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="210" y="40" width="23" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Rate]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="246" y="40" width="42" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="301" y="23" width="109" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Received/Issue Return]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="438" y="24" width="97" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Issue/Rece. Return]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="569" y="23" width="84" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Wastage]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="692" y="23" width="103" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Closing Balance]]></text>
+				</staticText>
+				<line>
+					<reportElement x="329" y="39" width="1" height="19" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="297" y="39" width="23" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Qty]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="337" y="38" width="23" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Rate]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="375" y="40" width="49" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Amount]]></text>
+				</staticText>
+				<line>
+					<reportElement x="370" y="38" width="1" height="19" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="503" y="41" width="49" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="467" y="41" width="23" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Rate]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="429" y="42" width="23" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Qty]]></text>
+				</staticText>
+				<line>
+					<reportElement x="458" y="38" width="1" height="19" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="620" y="40" width="1" height="19" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="631" y="39" width="43" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="594" y="39" width="23" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Rate]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="557" y="40" width="23" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Qty]]></text>
+				</staticText>
+				<line>
+					<reportElement x="583" y="39" width="1" height="19" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="681" y="40" width="23" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Qty]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="752" y="39" width="43" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="717" y="39" width="23" height="17" forecolor="#333333" backcolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Rate]]></text>
+				</staticText>
+				<line>
+					<reportElement x="497" y="39" width="1" height="19" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="708" y="38" width="1" height="19" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="749" y="38" width="1" height="19" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="798" y="20" width="1" height="38" forecolor="#333333" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="17">
+				<textField pattern="###0.00">
+					<reportElement x="224" y="3" width="64" height="14"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{OpenSum}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="81" y="0" width="61" height="13"/>
+					<textElement/>
+					<text><![CDATA[Grand Total]]></text>
+				</staticText>
+				<textField pattern="###0.00">
+					<reportElement x="355" y="3" width="69" height="13"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{receiveAmt}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement x="490" y="3" width="64" height="13"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{IssueAmt}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement x="616" y="4" width="57" height="13"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{wastageAmt}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement x="738" y="4" width="58" height="13"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{closeingAmt}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="productdate">
+		<groupExpression><![CDATA[$F{dDate}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="104" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="793" height="30" forecolor="#333333" backcolor="#666666"/>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{company}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="303" y="72" width="44" height="13" forecolor="#333333" backcolor="#666666"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[From Date:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="41" width="794" height="1" forecolor="#666666" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="1" y="25" width="793" height="16" forecolor="#333333" backcolor="#666666"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="10">
+				<reportElement x="287" y="51" width="221" height="17" forecolor="#666666" backcolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#333333"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="133" y="52" width="538" height="17" forecolor="#333333"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Date & Product Wise Balance Statement (R/M)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="348" y="72" width="54" height="13" forecolor="#333333"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{openFiscal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="438" y="72" width="64" height="13" forecolor="#333333"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{endFiscal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="413" y="72" width="22" height="19" forecolor="#666666" backcolor="#666666"/>
+				<textElement/>
+				<text><![CDATA[To]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField pattern="###0.00">
+				<reportElement x="459" y="2" width="38" height="19" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{DeliveryAmt}!=0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{DeliveryRate}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="8" y="-1" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="141" y="-1" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="425" y="0" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="9" y="21" width="790" height="1" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="12" y="1" width="51" height="20" forecolor="#333333" backcolor="#666666"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="2" width="72" height="20" forecolor="#333333" backcolor="#666666"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Particular}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="329" y="0" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="370" y="0" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="458" y="0" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="497" y="0" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="553" y="0" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="173" y="-1" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="206" y="0" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="243" y="0" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="583" y="0" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="620" y="0" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="675" y="0" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="708" y="0" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="750" y="0" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="798" y="-1" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="146" y="0" width="27" height="20" forecolor="#333333" backcolor="#666666"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PUnit}.equals("0")?"--":$F{PUnit}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="290" y="-1" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement x="246" y="1" width="42" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{OpeningAmt}!=0.00?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{OpeningAmt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="177" y="3" width="25" height="19" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{OpeningQty}==0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<textField pattern="###0">
+				<reportElement x="167" y="1" width="26" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{OpeningQty}!=0.00?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{OpeningQty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="210" y="2" width="31" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{OpeningRate}!=0.00?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{OpeningRate}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="65" y="-1" width="1" height="22" forecolor="#333333" backcolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="226" y="2" width="13" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{OpeningRate}==0.00?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<textField pattern="###0">
+				<reportElement x="290" y="0" width="39" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{ReceivedQty}!=0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ReceivedQty}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="244" y="3" width="44" height="17" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{OpeningAmt}==0.00?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="0" width="34" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{ReceivedQty}==0.0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<textField pattern="###0.00">
+				<reportElement x="328" y="1" width="40" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{ReceivedRate}!=0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ReceivedRate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="330" y="0" width="38" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{ReceivedRate}==0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<textField pattern="###0.00">
+				<reportElement x="369" y="1" width="53" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{ReceivedAmt}!=0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ReceivedAmt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement x="426" y="1" width="32" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{DeliveryQty}!=0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{DeliveryQty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="501" y="0" width="49" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{DeliveryAmt}!=0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{DeliveryAmt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement x="557" y="1" width="28" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{WastageQty}!=0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{WastageQty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="586" y="0" width="31" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{WastageRate}!=0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{WastageRate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="619" y="0" width="53" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{WastageAmt}!=0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{WastageAmt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement x="677" y="1" width="29" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{ClosingQty}!=0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ClosingQty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="708" y="1" width="40" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{ClosingRate}!=0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ClosingRate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="372" y="2" width="38" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{ReceivedAmt}==0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="429" y="1" width="29" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{DeliveryQty}==0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="38" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{DeliveryRate}==0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="503" y="0" width="38" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{DeliveryAmt}==0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="554" y="0" width="26" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{WastageQty}==0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="583" y="2" width="35" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{WastageRate}==0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="631" y="1" width="32" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{WastageAmt}==0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="679" y="0" width="27" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{ClosingQty}==0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="716" y="1" width="32" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{ClosingRate}==0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<textField pattern="###0.00">
+				<reportElement x="750" y="2" width="46" height="20" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{ClosingAmt}!=0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ClosingAmt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="763" y="3" width="32" height="13" forecolor="#333333" backcolor="#666666">
+					<printWhenExpression><![CDATA[$F{ClosingRate}==0?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[--]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="668" y="15" width="80" height="12" forecolor="#333333"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="127" y="15" width="315" height="12" forecolor="#333333"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<text><![CDATA[Software Solution by : E-Vision Software Limited. Tel: 812414, 813219]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="22" y="15" width="100" height="12" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="748" y="15" width="40" height="12" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

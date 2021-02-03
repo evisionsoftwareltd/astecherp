@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptPartyInfoBangla" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="786" leftMargin="36" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.1566298682885963"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="company" class="java.lang.String">
+		<defaultValueExpression><![CDATA["iZbcyi wkc wimvBwK¬s BÛvw÷ªR wjwg‡UW"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="address" class="java.lang.String">
+		<defaultValueExpression><![CDATA["kxc BqvW©: †mvbvBQwo , kxZjcyi, mxZvKzÛ, PUªMÖvg| cÖavb Kvh©vjh: bvnvi g¨vbmb, 116, wm wW G GwfwbD, gyiv`cyi, PUªMÖvg|"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="phone" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Phone: +88031-2502334-5 Fax: +88031-2502336 Email: ratanpur_sril@yahoo.com"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UserName" class="java.lang.String"/>
+	<parameter name="UserIp" class="java.lang.String"/>
+	<parameter name="sql" class="java.lang.String">
+		<defaultValueExpression><![CDATA["select * from tbParty_Info"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="autoId" class="java.lang.Integer"/>
+	<field name="partyCode" class="java.lang.String"/>
+	<field name="partyName" class="java.lang.String"/>
+	<field name="partyNameBan" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="addressBan" class="java.lang.String"/>
+	<field name="telephone" class="java.lang.String"/>
+	<field name="mobile" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="contactPerson" class="java.lang.String"/>
+	<field name="contactPersonBan" class="java.lang.String"/>
+	<field name="Designation" class="java.lang.String"/>
+	<field name="DesignationBan" class="java.lang.String"/>
+	<field name="personMobile" class="java.lang.String"/>
+	<field name="isActive" class="java.lang.Integer"/>
+	<field name="GroupId" class="java.lang.String"/>
+	<field name="groupName" class="java.lang.String"/>
+	<field name="SubGroupId" class="java.lang.String"/>
+	<field name="subGroupName" class="java.lang.String"/>
+	<field name="ledgerCode" class="java.lang.String"/>
+	<field name="primaryGroup" class="java.lang.String"/>
+	<field name="userName" class="java.lang.String"/>
+	<field name="userIp" class="java.lang.String"/>
+	<field name="entryTime" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="786" height="15" forecolor="#333333"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SutonnyMJ" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{company}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="14" width="786" height="11" forecolor="#333333"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="25" width="786" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{phone}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="-9" y="1" width="100" height="40"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="26" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="321" y="1" width="146" height="18" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<line>
+				<reportElement x="0" y="25" width="787" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="293" y="1" width="201" height="17" forecolor="#333333"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[‡µZvi wj÷]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="14" width="786" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="786" y="-1" width="1" height="16"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="1" y="0" width="33" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[‡KvW]]></text>
+			</staticText>
+			<line>
+				<reportElement x="34" y="0" width="1" height="14"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="35" y="0" width="117" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[‡µZvi bvg]]></text>
+			</staticText>
+			<line>
+				<reportElement x="152" y="0" width="1" height="14"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="153" y="0" width="90" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[`vwqZ¡ cÖvß e¨w³i bvg]]></text>
+			</staticText>
+			<line>
+				<reportElement x="243" y="0" width="1" height="14"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="244" y="0" width="60" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c`ex]]></text>
+			</staticText>
+			<line>
+				<reportElement x="367" y="0" width="1" height="14"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="305" y="0" width="62" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[†gvevBj]]></text>
+			</staticText>
+			<line>
+				<reportElement x="304" y="0" width="1" height="14"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="368" y="0" width="170" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[wVKvbv]]></text>
+			</staticText>
+			<line>
+				<reportElement x="538" y="0" width="1" height="14"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="539" y="0" width="49" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[‡Uwj‡dvb]]></text>
+			</staticText>
+			<line>
+				<reportElement x="657" y="0" width="1" height="14"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="658" y="0" width="50" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[d¨v·]]></text>
+			</staticText>
+			<line>
+				<reportElement x="708" y="0" width="1" height="14"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="709" y="0" width="77" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[B‡gBj]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="589" y="0" width="69" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[‡gvevBj]]></text>
+			</staticText>
+			<line>
+				<reportElement x="588" y="0" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="-15" width="1" height="15"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="152" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="12" width="786" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="34" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="304" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="538" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="367" y="-1" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="785" y="-1" width="1" height="14"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="243" y="0" width="1" height="13"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="657" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="708" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="588" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="1" y="0" width="33" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{partyCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="305" y="0" width="62" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{personMobile}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="539" y="0" width="49" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{telephone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="589" y="0" width="68" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{mobile}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="658" y="0" width="50" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="709" y="0" width="77" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="37" y="0" width="115" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{partyNameBan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="155" y="0" width="88" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contactPersonBan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="246" y="0" width="58" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DesignationBan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="168" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SutonnyMJ" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{addressBan}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement x="715" y="1" width="49" height="10" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy HH.mm.ss">
+				<reportElement x="2" y="1" width="69" height="10" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="764" y="1" width="22" height="10" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="1" width="51" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{UserName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="153" y="1" width="74" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{UserIp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="237" y="1" width="432" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6"/>
+				</textElement>
+				<text><![CDATA[Software Solution by : E-Vision Software Ltd. || Tel: 2522414 , 2523219 || helpline : 01755-506044 || www.eslctg.com]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

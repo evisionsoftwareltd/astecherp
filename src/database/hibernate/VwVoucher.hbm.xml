@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-Apr-2011 15:02:43 by Hibernate Tools 3.3.0.GA -->
+<hibernate-mapping>
+    <class name="database.hibernate.VwVoucher" table="vwVoucher" schema="dbo">
+        <composite-id name="id" class="database.hibernate.VwVoucherId">
+            <key-property name="autoId" type="int">
+                <column name="AutoId" />
+            </key-property>
+            <key-property name="voucherNo" type="string">
+                <column name="Voucher_No" length="50" />
+            </key-property>
+            <key-property name="date" type="timestamp">
+                <column name="Date" length="23" />
+            </key-property>
+            <key-property name="ledgerId" type="string">
+                <column name="Ledger_Id" length="50" />
+            </key-property>
+            <key-property name="narration" type="string">
+                <column name="Narration" length="250" />
+            </key-property>
+            <key-property name="drAmount" type="big_decimal">
+                <column name="DrAmount" scale="4" />
+            </key-property>
+            <key-property name="crAmount" type="big_decimal">
+                <column name="CrAmount" scale="4" />
+            </key-property>
+            <key-property name="vouchertype" type="string">
+                <column name="vouchertype" length="50" />
+            </key-property>
+            <key-property name="transactionWith" type="string">
+                <column name="TransactionWith" length="250" />
+            </key-property>
+            <key-property name="costId" type="string">
+                <column name="costId" length="50" />
+            </key-property>
+            <key-property name="userId" type="java.lang.Integer">
+                <column name="userId" />
+            </key-property>
+            <key-property name="userIp" type="string">
+                <column name="userIp" length="50" />
+            </key-property>
+            <key-property name="entryTime" type="timestamp">
+                <column name="entryTime" length="23" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

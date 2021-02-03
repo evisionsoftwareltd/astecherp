@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 11, 2011 10:26:55 AM by Hibernate Tools 3.3.0.GA -->
+<hibernate-mapping>
+    <class name="database.hibernate.TbFiscalYear" table="tbFiscal_Year" schema="dbo">
+        <id name="slNo" type="int">
+            <column name="SlNo" />
+            <generator class="assigned" />
+        </id>
+        <property name="autoId" type="int">
+            <column name="AutoId" not-null="true" />
+        </property>
+        <property name="opDate" type="timestamp">
+            <column name="Op_Date" length="23" />
+        </property>
+        <property name="clDate" type="timestamp">
+            <column name="Cl_Date" length="23" />
+        </property>
+        <property name="runningFlag" type="int">
+            <column name="Running_Flag" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

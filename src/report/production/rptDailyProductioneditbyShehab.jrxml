@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptDailyProductioneditbyshehab" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="814" leftMargin="14" rightMargin="14" topMargin="9" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="31"/>
+	<parameter name="sql" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["select * from funcRptDailyProduction('PT-1','BlowSTP-1','2017-01-25') order by semiFgName "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="company" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="Phone" class="java.lang.String"/>
+	<parameter name="UserName" class="java.lang.String"/>
+	<parameter name="user" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\workspace\\astecherp\\src\\report\\production\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subsql" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="productionDate" class="java.sql.Timestamp"/>
+	<field name="productionTypeId" class="java.lang.String"/>
+	<field name="productTypeName" class="java.lang.String"/>
+	<field name="stepId" class="java.lang.String"/>
+	<field name="StepName" class="java.lang.String"/>
+	<field name="MachineId" class="java.lang.String"/>
+	<field name="MachineName" class="java.lang.String"/>
+	<field name="semiFgId" class="java.lang.String"/>
+	<field name="semiFgName" class="java.lang.String"/>
+	<field name="jobOrderNo" class="java.lang.String"/>
+	<field name="color" class="java.lang.String"/>
+	<field name="cavityNo" class="java.math.BigDecimal"/>
+	<field name="cycletime" class="java.math.BigDecimal"/>
+	<field name="mouldId" class="java.lang.String"/>
+	<field name="mouldName" class="java.lang.String"/>
+	<field name="terget" class="java.math.BigDecimal"/>
+	<field name="ShiftAPcs" class="java.math.BigDecimal"/>
+	<field name="RejShiftA" class="java.math.BigDecimal"/>
+	<field name="ShiftBPcs" class="java.math.BigDecimal"/>
+	<field name="RejShiftB" class="java.math.BigDecimal"/>
+	<field name="achiv" class="java.math.BigDecimal"/>
+	<field name="khw" class="java.math.BigDecimal"/>
+	<field name="bdTime" class="java.lang.String"/>
+	<field name="bdReason" class="java.lang.String"/>
+	<field name="remarks" class="java.lang.String"/>
+	<variable name="sl" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{sl}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="79">
+			<rectangle radius="10">
+				<reportElement x="354" y="40" width="107" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="715" y="67" width="51" height="10" forecolor="#333333"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{productionDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="690" y="67" width="25" height="10" forecolor="#333333"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="26" width="813" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{Phone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="813" height="15" forecolor="#333333"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{company}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="16" width="813" height="10" forecolor="#333333"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="65" y="65" width="86" height="10"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{productTypeName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="65" width="64" height="10" forecolor="#333333"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Production Type :]]></text>
+			</staticText>
+			<image scaleImage="RealHeight">
+				<reportElement x="1" y="2" width="53" height="34"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement x="766" y="60" width="35" height="18"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+			</frame>
+			<textField>
+				<reportElement x="767" y="59" width="33" height="18"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{sl}+1]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="41" width="813" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DAILY PRODUCTION REPORT]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="256" y="65" width="86" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{StepName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="201" y="65" width="55" height="10" forecolor="#333333"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prodcution Step :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<line>
+				<reportElement x="14" y="1" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="1" y="1" width="13" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SL]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="814" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="105" y="1" width="176" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product Name]]></text>
+			</staticText>
+			<line>
+				<reportElement x="813" y="0" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="330" y="1" width="33" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Target
+Qty.(Pcs)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="563" y="1" width="1" height="30"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="433" y="0" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="306" y="0" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="470" y="0" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="31" width="814" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="281" y="0" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="307" y="1" width="22" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cavity]]></text>
+			</staticText>
+			<line>
+				<reportElement x="104" y="0" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="15" y="1" width="89" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Machine Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="1" width="24" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CT (Sec)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="363" y="0" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="329" y="0" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="364" y="1" width="34" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[A SHIFT
+Good
+Production]]></text>
+			</staticText>
+			<line>
+				<reportElement x="398" y="0" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="399" y="1" width="34" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[B SHIFT
+Good
+Production]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="1" width="36" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Good
+Prod.(Pcs)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="471" y="1" width="34" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[A SHIFT
+Reject
+Prod.(Pcs)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="505" y="0" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="506" y="1" width="33" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[B SHIFT
+Reject
+Prod.(Pcs)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="539" y="1" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="540" y="1" width="23" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total
+Reject
+Prod.
+(Pcs)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="564" y="1" width="44" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total
+Prod.
+(Pcs)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="608" y="0" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="674" y="0" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="610" y="1" width="26" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Achieve
+(%)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="636" y="0" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="638" y="1" width="35" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Present
+Khw.
+Reading]]></text>
+			</staticText>
+			<line>
+				<reportElement x="715" y="0" width="1" height="31"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="675" y="1" width="40" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Break
+Down
+Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="715" y="1" width="98" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reason of Break Down]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10">
+			<line>
+				<reportElement mode="Opaque" x="0" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="813" y="0" width="1" height="10" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement mode="Opaque" x="1" y="0" width="13" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{sl}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="9" width="814" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="14" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="104" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="398" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="329" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="281" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="363" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="563" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0">
+				<reportElement x="282" y="0" width="24" height="9"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{cycletime}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement mode="Opaque" x="433" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="675" y="0" width="40" height="9"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{bdTime}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="715" y="0" width="98" height="9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{bdReason}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="307" y="0" width="22" height="9"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{cavityNo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="330" y="0" width="33" height="9"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{terget}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="638" y="0" width="36" height="9"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{khw}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="364" y="0" width="34" height="9"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{ShiftAPcs}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="399" y="0" width="34" height="9"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{ShiftBPcs}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="434" y="0" width="36" height="9"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{ShiftAPcs}+$F{ShiftBPcs}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="471" y="0" width="34" height="9"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{RejShiftA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement mode="Opaque" x="539" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="715" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="674" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="306" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="470" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="636" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="505" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="608" y="0" width="1" height="9" forecolor="#000000" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="506" y="0" width="33" height="9"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{RejShiftB}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="540" y="0" width="23" height="9"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{RejShiftA}+$F{RejShiftB}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="564" y="0" width="44" height="9"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[($F{ShiftAPcs}+$F{ShiftBPcs})+($F{RejShiftA}+$F{RejShiftB})]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="610" y="0" width="26" height="9"/>
+				<box leftPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{achiv}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="0" width="89" height="9"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MachineName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="0" width="175" height="9"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{semiFgName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement x="741" y="38" width="43" height="12" isPrintWhenDetailOverflows="true" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy HH:mm:ss">
+				<reportElement x="10" y="38" width="70" height="12" isPrintWhenDetailOverflows="true" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="785" y="38" width="29" height="12" isPrintWhenDetailOverflows="true" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="162" y="38" width="482" height="12" isPrintWhenDetailOverflows="true" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<text><![CDATA[Software Solution by : E-Vision Software Limited || www.eslctg.com || Mob:01755-506044]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="38" width="82" height="12" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{UserName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="212" y="19" width="94" height="12"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Production Incharge]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="19" width="62" height="12"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prepared By]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="5" width="82" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{user}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="501" y="19" width="94" height="12"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Manager (Production)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="718" y="19" width="94" height="12"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DMD]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="113" splitType="Stretch">
+			<subreport runToBottom="true">
+				<reportElement x="1" y="17" width="53" height="30" isPrintInFirstWholeBand="true"/>
+				<subreportParameter name="subsql">
+					<subreportParameterExpression><![CDATA[$P{subsql}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "rptDailyProductionSubeditbyshehab.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="1" y="2" width="93" height="10" isPrintInFirstWholeBand="true"/>
+				<box>
+					<pen lineStyle="Dotted"/>
+					<topPen lineWidth="0.0" lineStyle="Dotted"/>
+					<leftPen lineWidth="0.0" lineStyle="Dotted"/>
+					<bottomPen lineWidth="0.0" lineStyle="Dotted"/>
+					<rightPen lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Arial Narrow" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Production Summary :]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

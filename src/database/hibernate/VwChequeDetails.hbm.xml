@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 11, 2011 10:26:55 AM by Hibernate Tools 3.3.0.GA -->
+<hibernate-mapping>
+    <class name="database.hibernate.VwChequeDetails" table="vwChequeDetails" schema="dbo" >
+        <composite-id name="id" class="database.hibernate.VwChequeDetailsId">
+            <key-property name="chequeNo" type="string">
+                <column name="Cheque_No" length="50" />
+            </key-property>
+            <key-property name="chequeDate" type="timestamp">
+                <column name="Cheque_Date" length="23" />
+            </key-property>
+            <key-property name="partyAccountDetails" type="string">
+                <column name="PartyAccountDetails" length="200" />
+            </key-property>
+            <key-property name="voucherNo" type="string">
+                <column name="Voucher_No" length="50" />
+            </key-property>
+            <key-property name="bankId" type="string">
+                <column name="Bank_Id" length="50" />
+            </key-property>
+            <key-property name="clearanceDate" type="timestamp">
+                <column name="ClearanceDate" length="23" />
+            </key-property>
+            <key-property name="bankName" type="string">
+                <column name="BankName" length="250" />
+            </key-property>
+            <key-property name="branchName" type="string">
+                <column name="BranchName" length="250" />
+            </key-property>
+            <key-property name="mrNo" type="int">
+                <column name="MrNo" />
+            </key-property>
+            <key-property name="payNo" type="int">
+                <column name="PayNo" />
+            </key-property>
+            <key-property name="pbankId" type="java.lang.Integer">
+                <column name="pbankId" />
+            </key-property>
+            <key-property name="pbranchId" type="java.lang.Integer">
+                <column name="pbranchId" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

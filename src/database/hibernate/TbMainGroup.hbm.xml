@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 11, 2011 10:26:55 AM by Hibernate Tools 3.3.0.GA -->
+<hibernate-mapping>
+    <class name="database.hibernate.TbMainGroup" table="tbMain_Group" schema="dbo" >
+        <id name="groupId" type="string">
+            <column name="Group_Id" length="50" />
+            <generator class="assigned" />
+        </id>
+        <property name="groupName" type="string">
+            <column name="Group_Name" length="100" />
+        </property>
+        <property name="headId" type="string">
+            <column name="Head_Id" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

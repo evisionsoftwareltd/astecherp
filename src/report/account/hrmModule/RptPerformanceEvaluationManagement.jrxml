@@ -1,0 +1,1806 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RptPerformanceEvaluationManagement" language="groovy" pageWidth="612" pageHeight="1008" columnWidth="539" leftMargin="36" rightMargin="37" topMargin="7" bottomMargin="6">
+	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="230"/>
+	<parameter name="company" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="email" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="phone" class="java.lang.String"/>
+	<parameter name="fax" class="java.lang.String"/>
+	<parameter name="sql" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["select ein.vEmployeeId,ein.employeeCode,ein.vProximityId,ein.vEmployeeName,ein.vDesignationId,"
++"ein.vSectionId,din.designationName,si.SectionName,ISNULL((select vNameOfExam from tbEducation "
++"ed where ed.vEmployeeId=ein.vEmployeeId and ed.iSerialNo=(select MAX(iSerialNo) from tbEducation "
++"ed where ed.vEmployeeId=ein.vEmployeeId)),'') vHighestDegree,ein.dInterviewDate,ein.dJoiningDate "
++"from tbEmployeeInfo ein inner join tbDesignationInfo din on ein.vDesignationId=din.designationId "
++"inner join tbSectionInfo si on si.AutoID=ein.vSectionId"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UserName" class="java.lang.String"/>
+	<parameter name="userIp" class="java.lang.String"/>
+	<parameter name="SysDate" class="java.util.Date"/>
+	<parameter name="year" class="java.lang.String"/>
+	<parameter name="month" class="java.lang.String"/>
+	<parameter name="fromDate" class="java.lang.String"/>
+	<parameter name="toDate" class="java.lang.String"/>
+	<parameter name="tikLogo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="vEmployeeId" class="java.lang.String"/>
+	<field name="employeeCode" class="java.lang.String"/>
+	<field name="vProximityId" class="java.lang.String"/>
+	<field name="vEmployeeName" class="java.lang.String"/>
+	<field name="vDesignationId" class="java.lang.String"/>
+	<field name="vSectionId" class="java.lang.String"/>
+	<field name="designationName" class="java.lang.String"/>
+	<field name="SectionName" class="java.lang.String"/>
+	<field name="vHighestDegree" class="java.lang.String"/>
+	<field name="dInterviewDate" class="java.sql.Date"/>
+	<field name="dJoiningDate" class="java.sql.Date"/>
+	<variable name="sl" class="java.lang.Number" resetType="Group" resetGroup="employee">
+		<variableExpression><![CDATA[$V{sl}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="mDays" class="java.lang.Number" resetType="Group" resetGroup="employee">
+		<variableExpression><![CDATA[$V{sl}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="employee" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{vEmployeeId}]]></groupExpression>
+		<groupHeader>
+			<band height="862">
+				<line>
+					<reportElement x="0" y="132" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="154" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="132" width="1" height="133"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="1" y="133" width="20" height="21"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sl #]]></text>
+				</staticText>
+				<line>
+					<reportElement x="21" y="132" width="1" height="133"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="386" y="132" width="1" height="144"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="158" y="132" width="1" height="165"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="22" y="133" width="136" height="21"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Performace Factors]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="159" y="133" width="75" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Outstanding]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="235" y="133" width="75" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Very Good]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="387" y="133" width="75" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tolerable]]></text>
+				</staticText>
+				<line>
+					<reportElement x="310" y="132" width="1" height="144"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="462" y="132" width="1" height="144"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="311" y="133" width="75" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Good]]></text>
+				</staticText>
+				<line>
+					<reportElement x="538" y="132" width="1" height="13"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="538" y="132" width="1" height="165"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="463" y="133" width="75" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Poor]]></text>
+				</staticText>
+				<rectangle radius="10">
+					<reportElement mode="Transparent" x="162" y="3" width="214" height="14"/>
+				</rectangle>
+				<textField>
+					<reportElement x="94" y="22" width="293" height="12"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vEmployeeName}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="92" y="22" width="2" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="94" y="46" width="148" height="12">
+						<printWhenExpression><![CDATA[$F{SectionName}.equals(null)?false:true]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{SectionName}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="92" y="46" width="2" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="3" width="539" height="14" forecolor="#000000" backcolor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="SansSerif" size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PERFORMANCE EVALUATION (M)]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="94" y="34" width="148" height="12">
+						<printWhenExpression><![CDATA[$F{designationName}.equals(null)?false:true]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{designationName}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="92" y="34" width="2" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="22" width="78" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Employee Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="46" width="78" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Section]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="34" width="78" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Designation]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="92" y="70" width="2" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="70" width="78" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PF Number]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="58" width="78" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date of Joining (PP)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="92" y="58" width="2" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="92" y="82" width="2" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="82" width="78" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Evaluation Period]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="266" y="34" width="93" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Highest Degree]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="359" y="34" width="2" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="266" y="46" width="93" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Additional Qualification]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="359" y="46" width="2" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField pattern="dd-MM-yyyy">
+					<reportElement x="94" y="58" width="148" height="12">
+						<printWhenExpression><![CDATA[$F{dInterviewDate}.equals(null)?false:true]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{dInterviewDate}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="94" y="82" width="26" height="12"/>
+					<box leftPadding="2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[From]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="164" y="82" width="22" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[To]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="266" y="58" width="93" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date of Joining]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="266" y="70" width="93" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date of Issue]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="359" y="58" width="2" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="359" y="70" width="2" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="95" width="228" height="29"/>
+					<textElement verticalAlignment="Middle">
+						<font size="5"/>
+					</textElement>
+					<text><![CDATA[Note :
+         •	       Please use your judgment for the mentioned period and do rating accordingly.
+         •	       Give initials in performance factors rating squares.
+         •	       Use (   ) at other options.
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="465" y="112" width="74" height="12"/>
+					<box>
+						<pen lineStyle="Dashed"/>
+						<topPen lineWidth="0.5" lineStyle="Dashed"/>
+						<leftPen lineStyle="Dashed"/>
+						<bottomPen lineStyle="Dashed"/>
+						<rightPen lineStyle="Dashed"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Head of HR]]></text>
+				</staticText>
+				<line>
+					<reportElement x="234" y="132" width="1" height="144"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="165" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="176" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="187" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="198" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="220" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="198" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="231" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="209" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="264" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="242" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="253" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="1" y="155" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[1.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="166" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[2.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="188" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[4.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="177" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[3.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="210" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[6.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="199" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[5.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="232" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[8.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="221" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[7.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="243" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[9.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="254" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[10.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="22" y="155" width="136" height="10"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Job Knowledge]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="22" y="166" width="136" height="10"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Quality of Works]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="22" y="177" width="136" height="10"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Honesty & Integrity]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="22" y="188" width="136" height="10"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Dependability]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="22" y="199" width="136" height="10"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Punctuality]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="22" y="221" width="136" height="10"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Initiative and Drive]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="22" y="210" width="136" height="10"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Team Work and Interpersonal Skills]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="22" y="232" width="136" height="10"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Willingness to learn and Creativity]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="22" y="254" width="136" height="10"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Attendance]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="22" y="243" width="136" height="10"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Leadership]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="94" y="265" width="64" height="10"/>
+					<box leftPadding="0" rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Column Total : ]]></text>
+				</staticText>
+				<line>
+					<reportElement x="158" y="275" width="381" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="158" y="286" width="381" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="158" y="296" width="381" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="94" y="276" width="64" height="10"/>
+					<box leftPadding="0" rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Total Marks : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="94" y="287" width="64" height="10"/>
+					<box leftPadding="0" rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Percentage : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="298" width="80" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Recommendations : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="40" y="309" width="368" height="29"/>
+					<box leftPadding="5"/>
+					<textElement verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[a) Confirmation of Service                                                                                   d) Training Required
+b) Extension of Probation                                                                                     e) Increment / Salary enhancement
+c) Promotion]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="339" width="105" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Signature of Supervising Officer ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="109" y="339" width="216" height="11"/>
+					<box>
+						<bottomPen lineWidth="0.75" lineStyle="Dotted"/>
+					</box>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="352" width="105" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Name                                       ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="109" y="352" width="216" height="11"/>
+					<box>
+						<bottomPen lineWidth="0.75" lineStyle="Dotted"/>
+					</box>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="106" y="339" width="2" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="106" y="352" width="2" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="109" y="378" width="216" height="11"/>
+					<box>
+						<bottomPen lineWidth="0.75" lineStyle="Dotted"/>
+					</box>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="106" y="378" width="2" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="365" width="105" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Designation]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="109" y="365" width="216" height="11"/>
+					<box>
+						<bottomPen lineWidth="0.75" lineStyle="Dotted"/>
+					</box>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="106" y="365" width="2" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="378" width="105" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Evaluation Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="447" y="378" width="92" height="12"/>
+					<box>
+						<pen lineStyle="Dashed"/>
+						<topPen lineWidth="0.5" lineStyle="Dashed"/>
+						<leftPen lineStyle="Dashed"/>
+						<bottomPen lineStyle="Dashed"/>
+						<rightPen lineStyle="Dashed"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Employee's Signature]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="311" y="423" width="75" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Good]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="477" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="455" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="422" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="1" y="456" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[2.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="159" y="423" width="75" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Outstanding]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="445" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[1.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="463" y="423" width="75" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Poor]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="466" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="444" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="235" y="423" width="75" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Very Good]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="22" y="423" width="136" height="21"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Performace Factors]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="423" width="20" height="21"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sl #]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="387" y="423" width="75" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tolerable]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="467" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[3.]]></text>
+				</staticText>
+				<line>
+					<reportElement x="21" y="422" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="234" y="422" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="462" y="422" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="422" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="310" y="422" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="158" y="422" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="386" y="422" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="538" y="422" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="158" y="144" width="381" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="311" y="145" width="75" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[7]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="159" y="145" width="75" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[10]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="463" y="145" width="75" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[5]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="235" y="145" width="75" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[8]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="387" y="145" width="75" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[6]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="159" y="435" width="75" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[10]]></text>
+				</staticText>
+				<line>
+					<reportElement x="158" y="434" width="381" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="463" y="435" width="75" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[5]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="235" y="435" width="75" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[8]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="387" y="435" width="75" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[6]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="311" y="435" width="75" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[7]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="398" width="325" height="22"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[a)       I agree with the comments of supervising officer
+b)       Following changes on the comments of supervising officer are made:
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="110" y="529" width="216" height="11"/>
+					<box>
+						<bottomPen lineWidth="0.75" lineStyle="Dotted"/>
+					</box>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="110" y="503" width="216" height="11"/>
+					<box>
+						<bottomPen lineWidth="0.75" lineStyle="Dotted"/>
+					</box>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="107" y="529" width="2" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="107" y="503" width="2" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="490" width="105" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Signature of reporting Officer ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="110" y="490" width="216" height="11"/>
+					<box>
+						<bottomPen lineWidth="0.75" lineStyle="Dotted"/>
+					</box>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="107" y="490" width="2" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="110" y="516" width="216" height="11"/>
+					<box>
+						<bottomPen lineWidth="0.75" lineStyle="Dotted"/>
+					</box>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="503" width="105" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Name                                       ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="529" width="105" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="107" y="516" width="2" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="516" width="105" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Designation]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="550" width="325" height="22"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[a)       I agree with the comments of supervising officer
+b)       Following changes on the comments of supervising officer are made:
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="311" y="586" width="75" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[7]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="235" y="586" width="75" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[8]]></text>
+				</staticText>
+				<line>
+					<reportElement x="234" y="573" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="573" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="159" y="586" width="75" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[10]]></text>
+				</staticText>
+				<line>
+					<reportElement x="538" y="573" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="463" y="574" width="75" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Poor]]></text>
+				</staticText>
+				<line>
+					<reportElement x="310" y="573" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="158" y="585" width="381" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="387" y="574" width="75" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tolerable]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="159" y="574" width="75" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Outstanding]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="387" y="586" width="75" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[6]]></text>
+				</staticText>
+				<line>
+					<reportElement x="386" y="573" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="1" y="596" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[1.]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="573" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="21" y="573" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="462" y="573" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="463" y="586" width="75" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[5]]></text>
+				</staticText>
+				<line>
+					<reportElement x="158" y="573" width="1" height="56"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="311" y="574" width="75" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Good]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="235" y="574" width="75" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Very Good]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="22" y="574" width="136" height="21"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Performace Factors]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="574" width="20" height="21"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sl #]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="595" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="628" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="617" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="606" width="539" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="1" y="607" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[2.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="618" width="20" height="10"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[3.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="630" width="50" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Comments : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="51" y="630" width="488" height="11"/>
+					<box leftPadding="2" rightPadding="0">
+						<pen lineWidth="1.0" lineStyle="Dotted"/>
+						<topPen lineWidth="0.0" lineStyle="Dotted"/>
+						<leftPen lineWidth="0.0" lineStyle="Dotted"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+						<rightPen lineWidth="0.0" lineStyle="Dotted"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="642" width="539" height="11"/>
+					<box leftPadding="2" rightPadding="0">
+						<pen lineWidth="1.0" lineStyle="Dotted"/>
+						<topPen lineWidth="0.0" lineStyle="Dotted"/>
+						<leftPen lineWidth="0.0" lineStyle="Dotted"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+						<rightPen lineWidth="0.0" lineStyle="Dotted"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="655" width="105" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Signature of controlling Officer ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="668" width="105" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Name                                       ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="109" y="655" width="216" height="11"/>
+					<box>
+						<bottomPen lineWidth="0.75" lineStyle="Dotted"/>
+					</box>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="109" y="681" width="216" height="11"/>
+					<box>
+						<bottomPen lineWidth="0.75" lineStyle="Dotted"/>
+					</box>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="681" width="105" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Designation]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="106" y="655" width="2" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="109" y="694" width="216" height="11"/>
+					<box>
+						<bottomPen lineWidth="0.75" lineStyle="Dotted"/>
+					</box>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="106" y="694" width="2" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="109" y="668" width="216" height="11"/>
+					<box>
+						<bottomPen lineWidth="0.75" lineStyle="Dotted"/>
+					</box>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="106" y="681" width="2" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="694" width="105" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="106" y="668" width="2" height="11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="714" width="50" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Comments : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="725" width="83" height="7"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[(as per concerned personal file)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="732" width="539" height="11"/>
+					<box leftPadding="2" rightPadding="0">
+						<pen lineWidth="1.0" lineStyle="Dotted"/>
+						<topPen lineWidth="0.0" lineStyle="Dotted"/>
+						<leftPen lineWidth="0.0" lineStyle="Dotted"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+						<rightPen lineWidth="0.0" lineStyle="Dotted"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="744" width="538" height="11"/>
+					<box leftPadding="2" rightPadding="0">
+						<pen lineWidth="1.0" lineStyle="Dotted"/>
+						<topPen lineWidth="0.0" lineStyle="Dotted"/>
+						<leftPen lineWidth="0.0" lineStyle="Dotted"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+						<rightPen lineWidth="0.0" lineStyle="Dotted"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="756" width="408" height="11"/>
+					<box leftPadding="2" rightPadding="0">
+						<pen lineWidth="1.0" lineStyle="Dotted"/>
+						<topPen lineWidth="0.0" lineStyle="Dotted"/>
+						<leftPen lineWidth="0.0" lineStyle="Dotted"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+						<rightPen lineWidth="0.0" lineStyle="Dotted"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="470" y="714" width="68" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[(HO HR Dept. Only)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="786" width="50" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Percentage]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="51" y="786" width="50" height="11"/>
+					<box leftPadding="2" rightPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="446" y="785" width="92" height="12"/>
+					<box>
+						<pen lineStyle="Dashed"/>
+						<topPen lineWidth="0.5" lineStyle="Dashed"/>
+						<leftPen lineStyle="Dashed"/>
+						<bottomPen lineStyle="Dashed"/>
+						<rightPen lineStyle="Dashed"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Head of HRD]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="807" width="87" height="11"/>
+					<box leftPadding="2" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Decision & Approval : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="818" width="408" height="11"/>
+					<box leftPadding="2" rightPadding="0">
+						<pen lineWidth="1.0" lineStyle="Dotted"/>
+						<topPen lineWidth="0.0" lineStyle="Dotted"/>
+						<leftPen lineWidth="0.0" lineStyle="Dotted"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+						<rightPen lineWidth="0.0" lineStyle="Dotted"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="446" y="850" width="92" height="12"/>
+					<box>
+						<pen lineStyle="Dashed"/>
+						<topPen lineWidth="0.5" lineStyle="Dashed"/>
+						<leftPen lineStyle="Dashed"/>
+						<bottomPen lineStyle="Dashed"/>
+						<rightPen lineStyle="Dashed"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Director/DMD]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="125" width="539" height="6" backcolor="#CCCCCC"/>
+					<textElement verticalAlignment="Middle">
+						<font size="5"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="391" width="539" height="6" backcolor="#CCCCCC"/>
+					<textElement verticalAlignment="Middle">
+						<font size="5"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="542" width="539" height="6" backcolor="#CCCCCC"/>
+					<textElement verticalAlignment="Middle">
+						<font size="5"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="707" width="539" height="6" backcolor="#CCCCCC"/>
+					<textElement verticalAlignment="Middle">
+						<font size="5"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="768" width="408" height="11"/>
+					<box leftPadding="2" rightPadding="0">
+						<pen lineWidth="1.0" lineStyle="Dotted"/>
+						<topPen lineWidth="0.0" lineStyle="Dotted"/>
+						<leftPen lineWidth="0.0" lineStyle="Dotted"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+						<rightPen lineWidth="0.0" lineStyle="Dotted"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="799" width="539" height="6" backcolor="#CCCCCC"/>
+					<textElement verticalAlignment="Middle">
+						<font size="5"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="830" width="408" height="11"/>
+					<box leftPadding="2" rightPadding="0">
+						<pen lineWidth="1.0" lineStyle="Dotted"/>
+						<topPen lineWidth="0.0" lineStyle="Dotted"/>
+						<leftPen lineWidth="0.0" lineStyle="Dotted"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+						<rightPen lineWidth="0.0" lineStyle="Dotted"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="120" y="82" width="44" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{fromDate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="186" y="82" width="44" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{toDate}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+					<reportElement x="361" y="58" width="100" height="12"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{dJoiningDate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="361" y="34" width="159" height="12"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{vHighestDegree}]]></textFieldExpression>
+				</textField>
+				<image scaleImage="FillFrame">
+					<reportElement x="52" y="117" width="3" height="5"/>
+					<imageExpression class="java.lang.String"><![CDATA[$P{tikLogo}+"TikMark.jpg"]]></imageExpression>
+				</image>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="44">
+			<textField>
+				<reportElement x="0" y="33" width="539" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{phone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="539" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{company}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="19" width="539" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="1" y="1" width="100" height="42"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band/>
+	</detail>
+	<pageFooter>
+		<band height="15">
+			<textField isStretchWithOverflow="true" pattern="dd-MM-yyyy hh:mm:ss aaa">
+				<reportElement x="2" y="4" width="99" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{SysDate}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="506" y="4" width="33" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="4" width="42" height="11"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="102" y="4" width="98" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{UserName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="200" y="4" width="264" height="11" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Developed by: E-Vision Software Ltd. ||  Mob:01755-506044 || www.eslctg.com]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="2" width="539" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

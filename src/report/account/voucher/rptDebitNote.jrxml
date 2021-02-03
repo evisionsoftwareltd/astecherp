@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptDebitNote" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.4793388429752152"/>
+	<property name="ireport.x" value="63"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="company" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="phone" class="java.lang.String"/>
+	<parameter name="userName" class="java.lang.String"/>
+	<parameter name="sql" class="java.lang.String">
+		<defaultValueExpression><![CDATA["select vSupplierId,vSupplierName,(select address from tbSupplierInfo si where dn.vSupplierId = si.supplierId )adress,dLastPaydate,mAmount,vReferenceNo,vVoucherNo,mCurrentBalance,dDate,vPoNo,dPoDate,mPoAmount,vLedgerName,vChequeNo,dChequeDate,vPaymentAgainst,vPaymentStatus,vModeOfPayment,mAmount,vPreparedBy,vAuditBy,vApproveBy from tbDebitNote dn where vVoucherNo = 'DR-BK-1'"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[".\report\\account\\voucher\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subsql" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["select TransactionWith,Voucher_No,(select vLedgerName from tbDebitNote dn where dn.vVoucherNo = v.Voucher_No )LedgerName,DrAmount,CrAmount,Narration from Voucher1 v where Voucher_No = 'DR-CH-53'"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="path" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="userIp" class="java.lang.String"/>
+	<parameter name="urlLink" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="vSupplierId" class="java.lang.String"/>
+	<field name="vSupplierName" class="java.lang.String"/>
+	<field name="adress" class="java.lang.String"/>
+	<field name="dLastPaydate" class="java.sql.Date"/>
+	<field name="mAmount" class="java.math.BigDecimal"/>
+	<field name="vReferenceNo" class="java.lang.String"/>
+	<field name="vVoucherNo" class="java.lang.String"/>
+	<field name="mCurrentBalance" class="java.math.BigDecimal"/>
+	<field name="dDate" class="java.sql.Date"/>
+	<field name="vPoNo" class="java.lang.String"/>
+	<field name="dPoDate" class="java.sql.Date"/>
+	<field name="mPoAmount" class="java.math.BigDecimal"/>
+	<field name="vLedgerName" class="java.lang.String"/>
+	<field name="vChequeNo" class="java.lang.String"/>
+	<field name="dChequeDate" class="java.sql.Date"/>
+	<field name="vPaymentAgainst" class="java.lang.String"/>
+	<field name="vPaymentStatus" class="java.lang.String"/>
+	<field name="vModeOfPayment" class="java.lang.String"/>
+	<field name="vPreparedBy" class="java.lang.String"/>
+	<field name="vAuditBy" class="java.lang.String"/>
+	<field name="vApproveBy" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="39" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{company}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="16" width="555" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="28" width="555" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{phone}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="60" height="38"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="398" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="5" width="555" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Debit Note]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement mode="Transparent" x="218" y="5" width="119" height="17" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="42" width="107" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Debit A/C Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="59" width="107" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="96" width="107" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ledger Balance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="113" width="107" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Last date of Payment]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="130" width="107" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payment Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="59" width="89" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="42" width="89" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reference No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="113" width="89" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payment Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="96" width="89" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payment Against]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="238" width="89" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Audited By]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="221" width="89" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prepared By]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="255" width="89" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Approved By]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="122" y="42" width="215" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vSupplierName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="59" width="215" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{adress}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="122" y="113" width="100" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dLastPaydate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="122" y="130" width="100" height="15"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{mAmount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="42" width="107" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vReferenceNo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="445" y="59" width="107" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="96" width="107" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vPaymentAgainst}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="113" width="107" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vPaymentStatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="221" width="107" height="15"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vPreparedBy}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="255" width="107" height="15"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vApproveBy}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="122" y="96" width="100" height="15"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{mCurrentBalance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="238" width="107" height="15"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vAuditBy}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="347" y="182" width="89" height="15">
+					<printWhenExpression><![CDATA[$F{vPaymentAgainst}.equals("PO")?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[P.O Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="165" width="89" height="15">
+					<printWhenExpression><![CDATA[$F{vPaymentAgainst}.equals("PO")?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[P.O No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="199" width="89" height="15">
+					<printWhenExpression><![CDATA[$F{vPaymentAgainst}.equals("PO")?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[P.O Amount]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="445" y="165" width="107" height="15">
+					<printWhenExpression><![CDATA[$F{vPaymentAgainst}.equals("PO")?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vPoNo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="445" y="182" width="107" height="15">
+					<printWhenExpression><![CDATA[$F{vPaymentAgainst}.equals("PO")?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dPoDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="445" y="199" width="107" height="15">
+					<printWhenExpression><![CDATA[$F{vPaymentAgainst}.equals("PO")?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{mPoAmount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="182" width="107" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Credit A/C Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="199" width="107" height="15">
+					<printWhenExpression><![CDATA[$F{vModeOfPayment}.equals("Cheque")?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cheque No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="216" width="107" height="15">
+					<printWhenExpression><![CDATA[$F{vModeOfPayment}.equals("Cheque")?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cheque Date]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="122" y="182" width="100" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vLedgerName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="199" width="100" height="15">
+					<printWhenExpression><![CDATA[$F{vModeOfPayment}.equals("Cheque")?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vChequeNo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="122" y="216" width="100" height="15">
+					<printWhenExpression><![CDATA[$F{vModeOfPayment}.equals("Cheque")?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dChequeDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="165" width="107" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mode of Payment]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="122" y="165" width="101" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vModeOfPayment}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="233" width="107" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="122" y="233" width="100" height="15"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{mAmount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="436" y="42" width="8" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="59" width="8" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="1" y="298" width="200" height="100">
+					<printWhenExpression><![CDATA[$F{vModeOfPayment}.toString().equals("Cash")?true:false]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="logo">
+					<subreportParameterExpression><![CDATA[$P{logo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="userIp">
+					<subreportParameterExpression><![CDATA[$P{userIp}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sql">
+					<subreportParameterExpression><![CDATA[$P{subsql}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="address">
+					<subreportParameterExpression><![CDATA[$P{address}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="attach"/>
+				<subreportParameter name="comName">
+					<subreportParameterExpression><![CDATA[$P{company}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="attach_1"/>
+				<subreportParameter name="userName">
+					<subreportParameterExpression><![CDATA[$P{userName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="url"/>
+				<subreportParameter name="urlLink">
+					<subreportParameterExpression><![CDATA[$P{urlLink}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="phoneFax">
+					<subreportParameterExpression><![CDATA[$P{phone}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{path} + "CashPaymentVoucher.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="298" width="200" height="100">
+					<printWhenExpression><![CDATA[$F{vModeOfPayment}.toString().equals("Cheque")?true:false]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="logo">
+					<subreportParameterExpression><![CDATA[$P{logo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="userIp">
+					<subreportParameterExpression><![CDATA[$P{userIp}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sql">
+					<subreportParameterExpression><![CDATA[$P{subsql}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="address">
+					<subreportParameterExpression><![CDATA[$P{address}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="attach"/>
+				<subreportParameter name="comName">
+					<subreportParameterExpression><![CDATA[$P{company}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="attach_1"/>
+				<subreportParameter name="userName">
+					<subreportParameterExpression><![CDATA[$P{userName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="url"/>
+				<subreportParameter name="urlLink">
+					<subreportParameterExpression><![CDATA[$P{urlLink}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="phoneFax">
+					<subreportParameterExpression><![CDATA[$P{phone}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{path}+ "BankPaymentVoucher.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="436" y="96" width="8" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="113" width="8" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="165" width="8" height="15">
+					<printWhenExpression><![CDATA[$F{vPaymentAgainst}.equals("PO")?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="182" width="8" height="15">
+					<printWhenExpression><![CDATA[$F{vPaymentAgainst}.equals("PO")?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="199" width="8" height="15">
+					<printWhenExpression><![CDATA[$F{vPaymentAgainst}.equals("PO")?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="221" width="8" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="238" width="8" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="255" width="8" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="42" width="8" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="59" width="8" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="96" width="8" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="113" width="8" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="130" width="8" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="165" width="8" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="182" width="8" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="199" width="8" height="15">
+					<printWhenExpression><![CDATA[$F{vModeOfPayment}.equals("Cheque")?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="216" width="8" height="15">
+					<printWhenExpression><![CDATA[$F{vModeOfPayment}.equals("Cheque")?true:false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="233" width="8" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="8" splitType="Stretch">
+			<textField pattern="dd-MM-yyyy HH.mm.ss">
+				<reportElement x="43" y="0" width="70" height="8" forecolor="#000000"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="0" width="78" height="8"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{userName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="194" y="0" width="286" height="8" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Software Solution by : E-Vision Software Limited. || Mobile:01755-506044]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="530" y="0" width="22" height="8" forecolor="#333333"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="49" height="8" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

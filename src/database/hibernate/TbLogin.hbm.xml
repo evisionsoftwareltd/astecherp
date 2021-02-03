@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 23, 2011 3:39:26 PM by Hibernate Tools 3.3.0.GA -->
+<hibernate-mapping>
+    <class name="database.hibernate.TbLogin" table="tbLogin" schema="dbo" >
+        <id name="userId" type="int">
+            <column name="userId" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="pass" type="string">
+            <column name="pass" length="100" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="createTime" length="23" />
+        </property>
+        <property name="createBy" type="java.lang.Integer">
+            <column name="createBy" />
+        </property>
+        <property name="isAdmin" type="java.lang.Integer">
+            <column name="isAdmin" />
+        </property>
+        <property name="isInsertable" type="java.lang.Integer">
+            <column name="isInsertable" />
+        </property>
+        <property name="isUpdateable" type="java.lang.Integer">
+            <column name="isUpdateable" />
+        </property>
+        <property name="isDeleteable" type="java.lang.Integer">
+            <column name="isDeleteable" />
+        </property>
+        <property name="isActive" type="java.lang.Integer">
+            <column name="isActive" />
+        </property>
+    </class>
+</hibernate-mapping>

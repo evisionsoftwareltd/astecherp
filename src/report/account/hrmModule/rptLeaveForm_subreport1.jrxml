@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptLeaveForm_subreport1" language="groovy" pageWidth="324" pageHeight="600" columnWidth="324" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="68"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="subsql" class="java.lang.String">
+		<defaultValueExpression><![CDATA[" SELECT  iClyBalance,iSlyBalance,iAlyBalance,iMlyBalance,iClOpening,iSlOpening,iAlOpening,iMlOpening,iClyBalance+iClOpening as iClTotal,iSlyBalance+iSlOpening as iSlTotal,iAlyBalance+iAlOpening as iAlTotal,iMlyBalance+iMlOpening as iMlTotal,iClEnjoyed,iSlEnjoyed,iAlEnjoyed,iMlEnjoyed,iClyBalance+iClOpening-iClEnjoyed as ClBalance,iSlyBalance+iSlOpening-iSlEnjoyed as SlBalance,iAlyBalance+iAlOpening-iAlEnjoyed as AlBalance,iMlyBalance+iMlOpening-iMlEnjoyed as MlBalance,b.vGender from tbLeaveBalanceNew as a inner join tbEmployeeInfo as b on a.vEmployeeId=b.vEmployeeId where b.vEmployeeId='31' "]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[$P!{subsql}]]>
+	</queryString>
+	<field name="iClyBalance" class="java.lang.Integer"/>
+	<field name="iSlyBalance" class="java.lang.Integer"/>
+	<field name="iAlyBalance" class="java.lang.Integer"/>
+	<field name="iMlyBalance" class="java.lang.Integer"/>
+	<field name="iClOpening" class="java.lang.Integer"/>
+	<field name="iSlOpening" class="java.lang.Integer"/>
+	<field name="iAlOpening" class="java.lang.Integer"/>
+	<field name="iMlOpening" class="java.lang.Integer"/>
+	<field name="iClTotal" class="java.lang.Integer"/>
+	<field name="iSlTotal" class="java.lang.Integer"/>
+	<field name="iAlTotal" class="java.lang.Integer"/>
+	<field name="iMlTotal" class="java.lang.Integer"/>
+	<field name="iClEnjoyed" class="java.lang.Integer"/>
+	<field name="iSlEnjoyed" class="java.lang.Integer"/>
+	<field name="iAlEnjoyed" class="java.lang.Integer"/>
+	<field name="iMlEnjoyed" class="java.lang.Integer"/>
+	<field name="ClBalance" class="java.lang.Integer"/>
+	<field name="SlBalance" class="java.lang.Integer"/>
+	<field name="AlBalance" class="java.lang.Integer"/>
+	<field name="MlBalance" class="java.lang.Integer"/>
+	<field name="vGender" class="java.lang.String"/>
+	<variable name="totalBal" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{vGender}.equals("Male")?($F{AlBalance}+$F{SlBalance}+$F{ClBalance}):
+($F{MlBalance}+$F{AlBalance}+$F{SlBalance}+$F{ClBalance})]]></variableExpression>
+	</variable>
+	<variable name="totalEnjoyed" class="java.lang.Integer" resetType="Column">
+		<variableExpression><![CDATA[$F{vGender}.equals("Male")?($F{iClEnjoyed}+$F{iSlEnjoyed}+$F{iAlEnjoyed}):
+($F{iClEnjoyed}+$F{iSlEnjoyed}+$F{iAlEnjoyed}+$F{iMlEnjoyed})]]></variableExpression>
+	</variable>
+	<variable name="total" class="java.lang.Integer" resetType="Column">
+		<variableExpression><![CDATA[$F{vGender}.equals("Male")?($F{iClTotal}+$F{iSlTotal}+$F{iAlTotal}):
+($F{iClTotal}+$F{iSlTotal}+$F{iAlTotal}+$F{iMlTotal})]]></variableExpression>
+	</variable>
+	<variable name="totalYear" class="java.lang.Integer" resetType="Column">
+		<variableExpression><![CDATA[$F{vGender}.equals("Male")?($F{iClOpening}+$F{iSlOpening}+$F{iAlOpening}):
+($F{iClOpening}+$F{iSlOpening}+$F{iAlOpening}+$F{iMlOpening})]]></variableExpression>
+	</variable>
+	<variable name="totalOpening" class="java.lang.Integer" resetType="Column">
+		<variableExpression><![CDATA[$F{vGender}.equals("Male")?($F{iClyBalance}+$F{iSlyBalance}+$F{iAlyBalance}):
+($F{iClyBalance}+$F{iSlyBalance}+$F{iAlyBalance}+$F{iMlyBalance})]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="307" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[The Applicants enjoyed Leaves During The Year are as Follows :]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="72" splitType="Stretch">
+			<staticText>
+				<reportElement x="23" y="1" width="72" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Name of Leave]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="1" height="72"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="1" y="57" width="322" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="323" y="0" width="1" height="72"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="1" y="29" width="323" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="232" y="44" width="41" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iAlEnjoyed}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="96" y="1" width="44" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Opening]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="30" width="72" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[SL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="187" y="16" width="42" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iClTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="30" width="45" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{SlBalance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="187" y="44" width="42" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iAlTotal}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="71" width="322" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="275" y="0" width="1" height="71"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="141" y="16" width="43" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iClOpening}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="16" width="21" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="1" width="47" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Balance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="44" width="21" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<line>
+				<reportElement x="22" y="0" width="1" height="71"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="95" y="0" width="1" height="71"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="140" y="0" width="1" height="71"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="23" y="44" width="72" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[EL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="1" width="21" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[SL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="58" width="21" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="232" y="1" width="43" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Enjoyed]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="15" width="323" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="276" y="58" width="45" height="13">
+					<printWhenExpression><![CDATA[$F{vGender}.equals("Male")?false:true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{MlBalance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="58" width="41" height="13">
+					<printWhenExpression><![CDATA[$F{vGender}.equals("Male")?false:true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iMlEnjoyed}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="30" width="43" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iSlOpening}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="186" y="0" width="1" height="71"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="141" y="1" width="45" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[This Year]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="141" y="44" width="43" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iAlOpening}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="187" y="30" width="42" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iSlTotal}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="0" width="323" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="1" y="30" width="21" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="1" width="44" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="43" width="322" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="23" y="16" width="72" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[CL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="96" y="58" width="42" height="13">
+					<printWhenExpression><![CDATA[$F{vGender}.equals("Male")?false:true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iMlyBalance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="16" width="45" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{ClBalance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="44" width="45" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{AlBalance}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="23" y="58" width="72" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[ML]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="96" y="16" width="42" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iClyBalance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="30" width="41" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iSlEnjoyed}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="16" width="41" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iClEnjoyed}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="96" y="44" width="42" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iAlyBalance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="187" y="58" width="42" height="13">
+					<printWhenExpression><![CDATA[$F{vGender}.equals("Male")?false:true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iMlTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="96" y="30" width="42" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iSlyBalance}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="231" y="0" width="1" height="71"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="141" y="58" width="43" height="13">
+					<printWhenExpression><![CDATA[$F{vGender}.equals("Male")?false:true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{iMlOpening}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="141" y="0" width="43" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{totalYear}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="0" width="41" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{totalEnjoyed}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="96" y="0" width="42" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{totalOpening}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="187" y="0" width="42" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="0" width="45" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{totalBal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="42" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Total :]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
