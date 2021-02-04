@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory name="">
+	    
+	    
+		<!--  <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+		<property name="hibernate.connection.password">123</property>
+		<property name="hibernate.connection.url">jdbc:sqlserver://esl12;</property>
+		<property name="hibernate.connection.databaseName">astecherp27-1-18</property>
+		<property name="hibernate.connection.username">sa</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+		<property name="hibernate.search.autoregister_listeners">false</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+		-->
+		
+		<mapping resource="database/hibernate/TbFiscalYear.hbm.xml" />
+		<mapping resource="database/hibernate/VwChequeDetails.hbm.xml" />
+		<mapping resource="database/hibernate/VwVoucher.hbm.xml" />
+		<mapping resource="database/hibernate/TbLedger.hbm.xml" />
+		<mapping resource="database/hibernate/TbCompanyInfo.hbm.xml" />
+		<mapping resource="database/hibernate/TbSubGroup.hbm.xml" />
+		<mapping resource="database/hibernate/TbLedgerOpBalance.hbm.xml" />
+		<mapping resource="database/hibernate/TbMainGroup.hbm.xml" />
+		<mapping resource="database/hibernate/VwChequeRegister.hbm.xml" />
+		<mapping resource="database/hibernate/TbPrimaryGroup.hbm.xml" />
+		<mapping resource="database/hibernate/VwLedgerList.hbm.xml" />
+		<mapping resource="database/hibernate/TbBudget.hbm.xml" />
+		<mapping resource="database/hibernate/TbNarrationList.hbm.xml" />
+		<mapping resource="database/hibernate/TbLogin.hbm.xml" />
+		<mapping resource="database/hibernate/TbAuthentication.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>
