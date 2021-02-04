@@ -263,10 +263,10 @@ public class ThirdPartyItemReceiptFind extends Window
 /*			query= "select vReceiptNo, dReceiptDate, vChallanNo,dChallanDate  "
 					+ "from tb3rdPartyReceiptInformation  where vPartyId like '"+partyId+"'"; */
 			
-			query=" select vReceiptNo, dReceiptDate, vChallanNo,dChallanDate  "
-					+ " from tb3rdPartyReceiptInformation a inner join tb3rdPartylabelInformation b  "
+			query=" select a.vReceiptNo, a.dReceiptDate, a.vChallanNo,a.dChallanDate  "
+					+ " from tb3rdPartyReceiptInformation a inner join tb3rdPartyReceiptDetails b  "
 					+ "on a.iTransectionId=b.iTransectionId where a.vPartyId like '"+partyId+"' "
-							+ "and b.vLabelCode like '"+product+"'";
+							+ "and b.vProductId like '"+product+"'";
 			
 			System.out.println("query"+query);
 			List list = session.createSQLQuery(query).list();
@@ -348,8 +348,10 @@ public class ThirdPartyItemReceiptFind extends Window
 			Session session= SessionFactoryUtil.getInstance().getCurrentSession();
 			tx=session.beginTransaction();
 			String sql="select distinct vLabelCode,vLabelName from tb3rdPartylabelInformation a "
-					+ " inner join tb3rdPartyReceiptDetails b on a.iTransectionId= b.iTransectionId "
+					+ " inner join tb3rdPartyReceiptDetails b on a.vLabelCode= b.vProductId "
 					+ "where vPartyId like '"+party+"'";
+			
+			
 			
 			System.out.println("Label Code or Product Name : "+sql);
 			List list = session.createSQLQuery(sql).list();
